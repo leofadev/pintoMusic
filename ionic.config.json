@@ -1,0 +1,7 @@
+{
+  "name": "pintoMusic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
