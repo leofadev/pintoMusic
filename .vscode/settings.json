@@ -4,6 +4,7 @@
     "@ionic/angular"
   ],
   "conventionalCommits.scopes": [
-    "init"
+    "init",
+    "ui"
   ]
 }

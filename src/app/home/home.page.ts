@@ -11,6 +11,36 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
+    temaOscuro = {
+    background: 'var(--pinto-music-dark-gray)',
+    textColor: 'var(--pinto-music-text-white)',
+    slideBackground: 'var(--pinto-music-card-bg)',
+    titleColor: 'var(--pinto-music-text-light)',
+    descriptionColor: 'var(--pinto-music-text-gray)',
+    borderColor: 'var(--pinto-music-border)',
+    hoverBackground: 'var(--pinto-music-card-hover-bg)',
+    shadow: 'var(--pinto-music-shadow-lg)',
+    hoverButton: 'var(--pinto-music-hover)',
+    toolbarBg: 'var(--pinto-music-header-bg)',
+    contentBg: 'var(--pinto-music-black)',
+    buttonTheme: 'var(--pinto-music-green-dark)'
+  };
+  temaClaro = {
+    background: 'var(--pinto-music-light-bg)',
+    textColor: 'var(--pinto-music-text-dark-primary)',
+    slideBackground: 'var(--pinto-music-card-bg-light)',
+    titleColor: 'var(--pinto-music-text-black)',
+    descriptionColor: 'var(--pinto-music-text-dark-secondary)',
+    borderColor: 'var(--pinto-music-border-light-theme)',
+    hoverBackground: 'var(--pinto-music-card-hover-bg-light)',
+    shadow: 'var(--pinto-music-shadow-lg-light)',
+    hoverButton: 'var(--pinto-music-hover)',
+    toolbarBg: 'var(--pinto-music-header-bg-light)',
+    contentBg: 'var(--pinto-music-white)',
+    buttonTheme: 'var(--pinto-music-button-secondary-border-light)'
+  };
+  temaActual = this.temaOscuro;
+
   genres = [
     {
       title: "Musica clasica",
@@ -49,4 +79,8 @@ export class HomePage {
     }
   ]
   constructor() {}
+
+  cambiarTema(){
+    this.temaActual = this.temaActual === this.temaOscuro ? this.temaClaro : this.temaOscuro;
+  }
 }

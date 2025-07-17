@@ -1,2 +1,217 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+:root {
+  /*  COLORES PRINCIPALES */
+  --pinto-music-green: #1DB954;           /* Verde principal/brand */
+  --pinto-music-green-light: #1ED760;     /* Verde claro (hover/active) */
+  --pinto-music-green-dark: #169C46;      /* Verde oscuro (pressed) */
+  --pinto-music-green-bright: #1FDF64;    /* Verde brillante (highlights) */
+
+  /* COLORES DE FONDO */
+  --pinto-music-black: #121212;           /* Negro oficial Spotify */
+  --pinto-music-dark-gray: #121212;       /* Gris oscuro principal */
+  --pinto-music-medium-gray: #1A1A1A;     /* Gris medio */
+  --pinto-music-light-gray: #242424;      /* Gris claro */
+  --pinto-music-card-gray: #181818;       /* Gris para cards */
+  --pinto-music-sidebar-gray: #000000;    /* Gris sidebar */
+  --pinto-music-white: #FFFFFF;           /* Fondo blanco (tema claro) */
+  --pinto-music-light-bg: #F8F9FA;        /* Fondo claro alternativo */
+  --pinto-music-light-card: #F1F1F1;      /* Cards tema claro */
+
+  /* COLORES DE TEXTO */
+  --pinto-music-text-white: #FFFFFF;      /* Texto blanco principal */
+  --pinto-music-text-light: #F5F5F5;      /* Texto claro */
+  --pinto-music-text-gray: #B3B3B3;       /* Texto secundario */
+  --pinto-music-text-dark: #A7A7A7;       /* Texto terciario */
+  --pinto-music-text-muted: #727272;      /* Texto deshabilitado */
+
+  /* COLORES DE TEXTO TEMA CLARO */
+  --pinto-music-text-black: #000000;      /* Texto negro principal */
+  --pinto-music-text-dark-primary: #121212; /* Texto principal tema claro */
+  --pinto-music-text-dark-secondary: #535353; /* Texto secundario tema claro */
+  --pinto-music-text-dark-muted: #A7A7A7; /* Texto deshabilitado tema claro */
+
+  /* COLORES DE ESTADO */
+  --pinto-music-error: #E22134;           /* Error/eliminado */
+  --pinto-music-warning: #FFA500;         /* Advertencia */
+  --pinto-music-success: #1DB954;         /* Éxito (mismo que verde) */
+  --pinto-music-info: #509BF5;            /* Información */
+
+  /* COLORES DE INTERACCIÓN TEMA OSCURO */
+  --pinto-music-hover: rgba(255, 255, 255, 0.1);     /* Hover genérico */
+  --pinto-music-hover-light: rgba(255, 255, 255, 0.2); /* Hover más intenso */
+  --pinto-music-active: rgba(255, 255, 255, 0.3);    /* Active/pressed */
+  --pinto-music-focus: rgba(29, 185, 84, 0.3);       /* Focus ring */
+  --pinto-music-selected: rgba(29, 185, 84, 0.1);    /* Seleccionado */
+
+  /* COLORES DE INTERACCIÓN TEMA CLARO */
+  --pinto-music-hover-light-theme: rgba(0, 0, 0, 0.04); /* Hover tema claro */
+  --pinto-music-hover-light-theme-intense: rgba(0, 0, 0, 0.08); /* Hover intenso tema claro */
+  --pinto-music-active-light-theme: rgba(0, 0, 0, 0.12); /* Active tema claro */
+  --pinto-music-selected-light-theme: rgba(29, 185, 84, 0.08); /* Seleccionado tema claro */
+
+  /* COLORES DE BORDER */
+  --pinto-music-border: #292929;          /* Border principal tema oscuro */
+  --pinto-music-border-light: #3E3E3E;    /* Border claro tema oscuro */
+  --pinto-music-border-dark: #1A1A1A;     /* Border oscuro tema oscuro */
+
+  /* COLORES DE BORDER TEMA CLARO */
+  --pinto-music-border-light-theme: #E0E0E0; /* Border tema claro */
+  --pinto-music-border-light-theme-dark: #D1D1D1; /* Border más oscuro tema claro */
+
+  /* COLORES DE OVERLAY */
+  --pinto-music-overlay: rgba(0, 0, 0, 0.5);         /* Overlay oscuro */
+  --pinto-music-overlay-light: rgba(0, 0, 0, 0.3);   /* Overlay claro */
+  --pinto-music-overlay-dark: rgba(0, 0, 0, 0.8);    /* Overlay intenso */
+  --pinto-music-overlay-white: rgba(255, 255, 255, 0.9); /* Overlay blanco */
+
+  /* GRADIENTES */
+  --pinto-music-gradient-green: linear-gradient(135deg, #1DB954, #1ED760);
+  --pinto-music-gradient-dark: linear-gradient(135deg, #121212, #1A1A1A);
+  --pinto-music-gradient-light: linear-gradient(135deg, #FFFFFF, #F8F9FA);
+  --pinto-music-gradient-overlay: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8));
+  --pinto-music-gradient-overlay-light: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));
+
+  /* SOMBRAS TEMA OSCURO */
+  --pinto-music-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --pinto-music-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --pinto-music-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --pinto-music-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  /* SOMBRAS TEMA CLARO */
+  --pinto-music-shadow-sm-light: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --pinto-music-shadow-md-light: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --pinto-music-shadow-lg-light: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --pinto-music-shadow-xl-light: 0 16px 48px rgba(0, 0, 0, 0.20);
+
+  /* COLORES ADICIONALES */
+  --pinto-music-purple: #8B5CF6;          /* Púrpura para podcasts */
+  --pinto-music-orange: #FF6B35;          /* Naranja para highlights */
+  --pinto-music-blue: #4A90E2;            /* Azul para links */
+  --pinto-music-yellow: #F59E0B;          /* Amarillo para notificaciones */
+  --pinto-music-pink: #EC4899;            /* Rosa para like/corazón */
+
+  /* TRANSPARENCIAS */
+  --pinto-music-alpha-10: rgba(255, 255, 255, 0.1);
+  --pinto-music-alpha-20: rgba(255, 255, 255, 0.2);
+  --pinto-music-alpha-30: rgba(255, 255, 255, 0.3);
+  --pinto-music-alpha-40: rgba(255, 255, 255, 0.4);
+  --pinto-music-alpha-50: rgba(255, 255, 255, 0.5);
+
+  /* TRANSPARENCIAS TEMA CLARO */
+  --pinto-music-alpha-black-10: rgba(0, 0, 0, 0.1);
+  --pinto-music-alpha-black-20: rgba(0, 0, 0, 0.2);
+  --pinto-music-alpha-black-30: rgba(0, 0, 0, 0.3);
+  --pinto-music-alpha-black-40: rgba(0, 0, 0, 0.4);
+  --pinto-music-alpha-black-50: rgba(0, 0, 0, 0.5);
+
+  /* VARIABLES DE TRANSICIÓN */
+  --pinto-music-transition-fast: 0.1s ease;
+  --pinto-music-transition-normal: 0.2s ease;
+  --pinto-music-transition-slow: 0.3s ease;
+  --pinto-music-transition-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* VARIABLES DE ESPACIADO */
+  --pinto-music-spacing-xs: 4px;
+  --pinto-music-spacing-sm: 8px;
+  --pinto-music-spacing-md: 16px;
+  --pinto-music-spacing-lg: 24px;
+  --pinto-music-spacing-xl: 32px;
+  --pinto-music-spacing-xxl: 48px;
+
+  /* VARIABLES DE BORDER RADIUS */
+  --pinto-music-radius-sm: 4px;
+  --pinto-music-radius-md: 8px;
+  --pinto-music-radius-lg: 12px;
+  --pinto-music-radius-xl: 16px;
+  --pinto-music-radius-full: 50%;
+
+  /* VARIABLES DE TYPOGRAPHY */
+  --pinto-music-font-weight-light: 300;
+  --pinto-music-font-weight-normal: 400;
+  --pinto-music-font-weight-medium: 500;
+  --pinto-music-font-weight-semibold: 600;
+  --pinto-music-font-weight-bold: 700;
+  --pinto-music-font-weight-extrabold: 800;
+
+  /* VARIABLES DE Z-INDEX */
+  --pinto-music-z-dropdown: 1000;
+  --pinto-music-z-modal: 1050;
+  --pinto-music-z-tooltip: 1100;
+  --pinto-music-z-notification: 1200;
+
+  /* VARIABLES DE SIDEBAR - TEMA OSCURO */
+  --pinto-music-sidebar-width: 280px;
+  --pinto-music-sidebar-collapsed-width: 72px;
+  --pinto-music-sidebar-bg: var(--pinto-music-black);
+  --pinto-music-sidebar-border: var(--pinto-music-border);
+
+  /* VARIABLES DE SIDEBAR - TEMA CLARO */
+  --pinto-music-sidebar-bg-light: var(--pinto-music-white);
+  --pinto-music-sidebar-border-light: var(--pinto-music-border-light-theme);
+
+  /* VARIABLES DE HEADER - TEMA OSCURO */
+  --pinto-music-header-height: 64px;
+  --pinto-music-header-bg: var(--pinto-music-black);
+  --pinto-music-header-border: var(--pinto-music-border);
+
+  /* VARIABLES DE HEADER - TEMA CLARO */
+  --pinto-music-header-bg-light: var(--pinto-music-white);
+  --pinto-music-header-border-light: var(--pinto-music-border-light-theme);
+
+  /* VARIABLES DE PLAYER - TEMA OSCURO */
+  --pinto-music-player-height: 90px;
+  --pinto-music-player-bg: var(--pinto-music-card-gray);
+  --pinto-music-player-border: var(--pinto-music-border);
+
+  /* VARIABLES DE PLAYER - TEMA CLARO */
+  --pinto-music-player-bg-light: var(--pinto-music-white);
+  --pinto-music-player-border-light: var(--pinto-music-border-light-theme);
+
+  /* VARIABLES DE CARDS - TEMA OSCURO */
+  --pinto-music-card-bg: var(--pinto-music-card-gray);
+  --pinto-music-card-hover-bg: var(--pinto-music-light-gray);
+  --pinto-music-card-radius: var(--pinto-music-radius-md);
+  --pinto-music-card-shadow: var(--pinto-music-shadow-md);
+
+  /* VARIABLES DE CARDS - TEMA CLARO */
+  --pinto-music-card-bg-light: var(--pinto-music-white);
+  --pinto-music-card-hover-bg-light: var(--pinto-music-light-card);
+  --pinto-music-card-shadow-light: var(--pinto-music-shadow-md-light);
+
+  /* VARIABLES DE BUTTONS - TEMA OSCURO */
+  --pinto-music-button-primary-bg: var(--pinto-music-green);
+  --pinto-music-button-primary-hover: var(--pinto-music-green-light);
+  --pinto-music-button-primary-active: var(--pinto-music-green-dark);
+  --pinto-music-button-secondary-bg: transparent;
+  --pinto-music-button-secondary-border: var(--pinto-music-border-light);
+  --pinto-music-button-secondary-hover: var(--pinto-music-hover);
+
+  /* VARIABLES DE BUTTONS - TEMA CLARO */
+  --pinto-music-button-secondary-bg-light: transparent;
+  --pinto-music-button-secondary-border-light: var(--pinto-music-border-light-theme);
+  --pinto-music-button-secondary-hover-light: var(--pinto-music-hover-light-theme);
+
+  /* VARIABLES DE INPUTS - TEMA OSCURO */
+  --pinto-music-input-bg: var(--pinto-music-card-gray);
+  --pinto-music-input-border: var(--pinto-music-border);
+  --pinto-music-input-focus-border: var(--pinto-music-green);
+  --pinto-music-input-placeholder: var(--pinto-music-text-muted);
+
+  /* VARIABLES DE INPUTS - TEMA CLARO */
+  --pinto-music-input-bg-light: var(--pinto-music-white);
+  --pinto-music-input-border-light: var(--pinto-music-border-light-theme);
+  --pinto-music-input-placeholder-light: var(--pinto-music-text-dark-muted);
+
+  /* VARIABLES DE SCROLLBAR - TEMA OSCURO */
+  --pinto-music-scrollbar-width: 8px;
+  --pinto-music-scrollbar-track: var(--pinto-music-dark-gray);
+  --pinto-music-scrollbar-thumb: var(--pinto-music-text-muted);
+  --pinto-music-scrollbar-thumb-hover: var(--pinto-music-text-gray);
+
+  /* VARIABLES DE SCROLLBAR - TEMA CLARO */
+  --pinto-music-scrollbar-track-light: var(--pinto-music-light-bg);
+  --pinto-music-scrollbar-thumb-light: var(--pinto-music-border-light-theme);
+  --pinto-music-scrollbar-thumb-hover-light: var(--pinto-music-text-dark-secondary);
+}
