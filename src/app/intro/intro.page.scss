@@ -1,0 +1,304 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Estilos para las tarjetas con sistema de temas */
+.cards-content {
+  --background: transparent;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cards-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.cards-swiper {
+  width: 320px;
+  height: 500px;
+}
+
+.card-slide {
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+/* Gradient overlay para cada carta individual */
+.card-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* Card content */
+.card-content {
+  padding: 32px 24px 24px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 2.2rem;
+  font-weight: var(--music-font-weight-bold, 700);
+  margin: 0 0 12px 0;
+  text-align: center;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  font-size: 1.1rem;
+  font-weight: var(--music-font-weight-medium, 500);
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* Card actions */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.primary-button {
+  border-radius: 16px;
+  padding: 14px 24px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.primary-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  background: inherit;
+  filter: blur(8px);
+  opacity: 0.3;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:hover::before {
+  opacity: 0.5;
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.button-text {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.back-button {
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.back-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.back-button span {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Decorative elements */
+.card-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.decoration-circle {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  top: -75px;
+  right: -75px;
+  opacity: 0.6;
+  filter: blur(1px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.decoration-circle-small {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  bottom: -50px;
+  left: -50px;
+  opacity: 0.4;
+  filter: blur(1px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Card glow effect */
+.card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.25;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Efectos adicionales para las cartas */
+.card-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Efecto hover para toda la carta */
+.card-slide:hover {
+  transform: scale(1.02);
+}
+
+.card-slide:hover .card-glow {
+  opacity: 0.3;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .cards-container {
+    padding: 10px;
+  }
+
+  .cards-swiper {
+    width: calc(100vw - 40px);
+    max-width: 320px;
+    height: 450px;
+  }
+
+  .card-title {
+    font-size: 1.9rem;
+  }
+
+  .card-subtitle {
+    font-size: 1rem;
+  }
+
+  .card-content {
+    padding: 28px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cards-swiper {
+    height: 400px;
+  }
+
+  .card-title {
+    font-size: 1.7rem;
+  }
+
+  .card-content {
+    padding: 24px 18px 18px 18px;
+  }
+}
+
+/* Swiper navigation */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: white;
+}

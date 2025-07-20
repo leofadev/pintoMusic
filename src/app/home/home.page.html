@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar [style.--background]="temaActual.toolbarBg">
 
-    <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--pinto-music-font-weight-bold)'">
+    <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--music-font-weight-bold)'">
       Tema
     </ion-title>
     <ion-button slot="end" (click)="cambiarTema()" [style.--color]="temaActual.hoverButton" [style.--background]="temaActual.buttonTheme">
       Modo
     </ion-button>
+      <ion-button class="btn" fill="outline" size="small" (click)="goIntro()" [style.--color]="temaActual.textColor" [style.--border-color]="temaActual.borderColor">
+            IR a la intro
+      </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -15,9 +18,9 @@
   <swiper-container pagination="true" loop="true" slides-per-view="1" autoplay="true" autoplay-delay="10000" [style.background-color]="temaActual.contentBg" [style.height]="'100%'">
     <swiper-slide *ngFor="let genre of genres">
       <div class="slide-content" [style.background-color]="temaActual.slideBackground" [style.color]="temaActual.textColor" [style.box-shadow]="temaActual.shadow">
-        <h2 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--pinto-music-font-weight-bold)'">{{ genre.title }}</h2>
+        <h2 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">{{ genre.title }}</h2>
         <img [src]="genre.image" [alt]="genre.title">
-        <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--pinto-music-font-weight-normal)'">{{ genre.description }}</p>
+        <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">{{ genre.description }}</p>
       </div>
     </swiper-slide>
   </swiper-container>

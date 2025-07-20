@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ThemeService, Theme } from '../services/theme.service';
+import { Subscription } from 'rxjs';
+import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,36 +14,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   imports: [IonicModule, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage {
-    temaOscuro = {
-    background: 'var(--pinto-music-dark-gray)',
-    textColor: 'var(--pinto-music-text-white)',
-    slideBackground: 'var(--pinto-music-card-bg)',
-    titleColor: 'var(--pinto-music-text-light)',
-    descriptionColor: 'var(--pinto-music-text-gray)',
-    borderColor: 'var(--pinto-music-border)',
-    hoverBackground: 'var(--pinto-music-card-hover-bg)',
-    shadow: 'var(--pinto-music-shadow-lg)',
-    hoverButton: 'var(--pinto-music-hover)',
-    toolbarBg: 'var(--pinto-music-header-bg)',
-    contentBg: 'var(--pinto-music-black)',
-    buttonTheme: 'var(--pinto-music-green-dark)'
-  };
-  temaClaro = {
-    background: 'var(--pinto-music-light-bg)',
-    textColor: 'var(--pinto-music-text-dark-primary)',
-    slideBackground: 'var(--pinto-music-card-bg-light)',
-    titleColor: 'var(--pinto-music-text-black)',
-    descriptionColor: 'var(--pinto-music-text-dark-secondary)',
-    borderColor: 'var(--pinto-music-border-light-theme)',
-    hoverBackground: 'var(--pinto-music-card-hover-bg-light)',
-    shadow: 'var(--pinto-music-shadow-lg-light)',
-    hoverButton: 'var(--pinto-music-hover)',
-    toolbarBg: 'var(--pinto-music-header-bg-light)',
-    contentBg: 'var(--pinto-music-white)',
-    buttonTheme: 'var(--pinto-music-button-secondary-border-light)'
-  };
-  temaActual = this.temaOscuro;
+export class HomePage implements OnInit, OnDestroy {
+
+  temaActual!: Theme;
+  private themeSubscription!: Subscription;
 
   genres = [
     {
@@ -77,10 +55,34 @@ export class HomePage {
       image: "https://img1.picmix.com/output/stamp/normal/3/0/9/2/2282903_e6980.png",
       description: "Originado en Jamaica, el reggae transmite un mensaje de paz, unidad y conciencia social. Con ritmos lentos y marcados, guitarras sincopadas y letras profundas, este género ganó fama mundial gracias a artistas como Bob Marley. El reggae no solo es música: es un estilo de vida que promueve la armonía, la espiritualidad y la resistencia cultural."
     }
-  ]
-  constructor() {}
+  ];
 
-  cambiarTema(){
-    this.temaActual = this.temaActual === this.temaOscuro ? this.temaClaro : this.temaOscuro;
+  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router) {}
+
+  ngOnInit() {
+    // Suscribirse a los cambios de tema
+    this.themeSubscription = this.themeService.temaActual$.subscribe(tema => {
+      this.temaActual = tema;
+    });
+
+    // Obtener el tema actual inmediatamente (en caso de que ya esté cargado)
+    this.temaActual = this.themeService.temaActual;
+  }
+
+  ngOnDestroy() {
+    // Limpiar la suscripción para evitar memory leaks
+    if (this.themeSubscription) {
+      this.themeSubscription.unsubscribe();
+    }
+  }
+
+  // Método simplificado para cambiar tema
+  async cambiarTema() {
+    await this.themeService.cambiarTema();
+  }
+
+  async goIntro(){
+    await this.storageService.remove('introView');
+    this.router.navigateByUrl("/intro");
   }
 }

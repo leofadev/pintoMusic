@@ -2,216 +2,1190 @@
 // http://ionicframework.com/docs/theming/
 
 :root {
-  /*  COLORES PRINCIPALES */
-  --pinto-music-green: #1DB954;           /* Verde principal/brand */
-  --pinto-music-green-light: #1ED760;     /* Verde claro (hover/active) */
-  --pinto-music-green-dark: #169C46;      /* Verde oscuro (pressed) */
-  --pinto-music-green-bright: #1FDF64;    /* Verde brillante (highlights) */
+  /* ===== COLORES PRINCIPALES ===== */
+  --music-green: #1DB954;           /* Verde principal/brand */
+  --music-green-light: #1ED760;     /* Verde claro (hover/active) */
+  --music-green-dark: #169C46;      /* Verde oscuro (pressed) */
+  --music-green-bright: #1FDF64;    /* Verde brillante (highlights) */
+  --music-green-muted: rgba(29, 185, 84, 0.8); /* Verde con transparencia */
 
-  /* COLORES DE FONDO */
-  --pinto-music-black: #121212;           /* Negro oficial Spotify */
-  --pinto-music-dark-gray: #121212;       /* Gris oscuro principal */
-  --pinto-music-medium-gray: #1A1A1A;     /* Gris medio */
-  --pinto-music-light-gray: #242424;      /* Gris claro */
-  --pinto-music-card-gray: #181818;       /* Gris para cards */
-  --pinto-music-sidebar-gray: #000000;    /* Gris sidebar */
-  --pinto-music-white: #FFFFFF;           /* Fondo blanco (tema claro) */
-  --pinto-music-light-bg: #F8F9FA;        /* Fondo claro alternativo */
-  --pinto-music-light-card: #F1F1F1;      /* Cards tema claro */
+  /* ===== COLORES DE FONDO - TEMA OSCURO ===== */
+  --music-black: #000000;           /* Negro puro (sidebar, fondos intensos) */
+  --music-dark-gray: #121212;       /* Gris oscuro principal (fondo principal) */
+  --music-medium-gray: #1A1A1A;     /* Gris medio (contenedores) */
+  --music-light-gray: #242424;      /* Gris claro (hover states) */
+  --music-card-gray: #181818;       /* Gris para cards */
+  --music-elevated-gray: #282828;   /* Gris elevado (modales, dropdowns) */
+  --music-border-gray: #2A2A2A;     /* Gris para bordes sutiles */
 
-  /* COLORES DE TEXTO */
-  --pinto-music-text-white: #FFFFFF;      /* Texto blanco principal */
-  --pinto-music-text-light: #F5F5F5;      /* Texto claro */
-  --pinto-music-text-gray: #B3B3B3;       /* Texto secundario */
-  --pinto-music-text-dark: #A7A7A7;       /* Texto terciario */
-  --pinto-music-text-muted: #727272;      /* Texto deshabilitado */
+  /* ===== COLORES DE FONDO - TEMA CLARO ===== */
+  --music-white: #FFFFFF;           /* Fondo blanco principal */
+  --music-light-bg: #FAFAFA;        /* Fondo claro alternativo */
+  --music-light-card: #F7F7F7;      /* Cards tema claro */
+  --music-light-elevated: #FFFFFF;  /* Elementos elevados tema claro */
 
-  /* COLORES DE TEXTO TEMA CLARO */
-  --pinto-music-text-black: #000000;      /* Texto negro principal */
-  --pinto-music-text-dark-primary: #121212; /* Texto principal tema claro */
-  --pinto-music-text-dark-secondary: #535353; /* Texto secundario tema claro */
-  --pinto-music-text-dark-muted: #A7A7A7; /* Texto deshabilitado tema claro */
+  /* ===== COLORES DE TEXTO - TEMA OSCURO ===== */
+  --music-text-white: #FFFFFF;      /* Texto blanco principal */
+  --music-text-light: #F7F7F7;      /* Texto claro secundario */
+  --music-text-gray: #B3B3B3;       /* Texto secundario/subtítulos */
+  --music-text-dark: #A7A7A7;       /* Texto terciario */
+  --music-text-muted: #727272;      /* Texto deshabilitado */
+  --music-text-subtle: #535353;     /* Texto muy sutil */
 
-  /* COLORES DE ESTADO */
-  --pinto-music-error: #E22134;           /* Error/eliminado */
-  --pinto-music-warning: #FFA500;         /* Advertencia */
-  --pinto-music-success: #1DB954;         /* Éxito (mismo que verde) */
-  --pinto-music-info: #509BF5;            /* Información */
+  /* ===== COLORES DE TEXTO - TEMA CLARO ===== */
+  --music-text-black: #000000;      /* Texto negro principal */
+  --music-text-dark-primary: #121212;   /* Texto principal tema claro */
+  --music-text-dark-secondary: #6A6A6A; /* Texto secundario tema claro */
+  --music-text-dark-muted: #8E8E8E;     /* Texto deshabilitado tema claro */
+  --music-text-dark-subtle: #ADADAD;    /* Texto muy sutil tema claro */
 
-  /* COLORES DE INTERACCIÓN TEMA OSCURO */
-  --pinto-music-hover: rgba(255, 255, 255, 0.1);     /* Hover genérico */
-  --pinto-music-hover-light: rgba(255, 255, 255, 0.2); /* Hover más intenso */
-  --pinto-music-active: rgba(255, 255, 255, 0.3);    /* Active/pressed */
-  --pinto-music-focus: rgba(29, 185, 84, 0.3);       /* Focus ring */
-  --pinto-music-selected: rgba(29, 185, 84, 0.1);    /* Seleccionado */
+  /* ===== COLORES DE ESTADO ===== */
+  --music-error: #E22134;           /* Error/eliminado */
+  --music-error-light: #F87171;     /* Error claro */
+  --music-error-dark: #B91C3C;      /* Error oscuro */
+  --music-warning: #F59E0B;         /* Advertencia */
+  --music-warning-light: #FCD34D;   /* Advertencia clara */
+  --music-warning-dark: #D97706;    /* Advertencia oscura */
+  --music-success: #1DB954;         /* Éxito (verde brand) */
+  --music-success-light: #22C55E;   /* Éxito claro */
+  --music-success-dark: #16A34A;    /* Éxito oscuro */
+  --music-info: #3B82F6;            /* Información */
+  --music-info-light: #60A5FA;      /* Información clara */
+  --music-info-dark: #2563EB;       /* Información oscura */
 
-  /* COLORES DE INTERACCIÓN TEMA CLARO */
-  --pinto-music-hover-light-theme: rgba(0, 0, 0, 0.04); /* Hover tema claro */
-  --pinto-music-hover-light-theme-intense: rgba(0, 0, 0, 0.08); /* Hover intenso tema claro */
-  --pinto-music-active-light-theme: rgba(0, 0, 0, 0.12); /* Active tema claro */
-  --pinto-music-selected-light-theme: rgba(29, 185, 84, 0.08); /* Seleccionado tema claro */
+  /* ===== COLORES DE INTERACCIÓN - TEMA OSCURO ===== */
+  --music-hover: rgba(255, 255, 255, 0.1);     /* Hover genérico */
+  --music-hover-light: rgba(255, 255, 255, 0.2); /* Hover más intenso */
+  --music-hover-subtle: rgba(255, 255, 255, 0.05); /* Hover muy sutil */
+  --music-active: rgba(255, 255, 255, 0.3);    /* Active/pressed */
+  --music-focus: rgba(29, 185, 84, 0.4);       /* Focus ring */
+  --music-selected: rgba(29, 185, 84, 0.15);   /* Seleccionado */
+  --music-disabled: rgba(255, 255, 255, 0.3);  /* Elementos deshabilitados */
 
-  /* COLORES DE BORDER */
-  --pinto-music-border: #292929;          /* Border principal tema oscuro */
-  --pinto-music-border-light: #3E3E3E;    /* Border claro tema oscuro */
-  --pinto-music-border-dark: #1A1A1A;     /* Border oscuro tema oscuro */
+  /* ===== COLORES DE INTERACCIÓN - TEMA CLARO ===== */
+  --music-hover-light-theme: rgba(0, 0, 0, 0.04); /* Hover tema claro */
+  --music-hover-light-theme-intense: rgba(0, 0, 0, 0.08); /* Hover intenso tema claro */
+  --music-hover-light-theme-subtle: rgba(0, 0, 0, 0.02);  /* Hover sutil tema claro */
+  --music-active-light-theme: rgba(0, 0, 0, 0.12); /* Active tema claro */
+  --music-focus-light-theme: rgba(29, 185, 84, 0.3); /* Focus tema claro */
+  --music-selected-light-theme: rgba(29, 185, 84, 0.08); /* Seleccionado tema claro */
+  --music-disabled-light-theme: rgba(0, 0, 0, 0.26); /* Deshabilitado tema claro */
 
-  /* COLORES DE BORDER TEMA CLARO */
-  --pinto-music-border-light-theme: #E0E0E0; /* Border tema claro */
-  --pinto-music-border-light-theme-dark: #D1D1D1; /* Border más oscuro tema claro */
+  /* ===== COLORES DE BORDER ===== */
+  --music-border: #292929;          /* Border principal tema oscuro */
+  --music-border-light: #3E3E3E;    /* Border claro tema oscuro */
+  --music-border-dark: #1A1A1A;     /* Border oscuro tema oscuro */
+  --music-border-subtle: #1F1F1F;   /* Border muy sutil tema oscuro */
 
-  /* COLORES DE OVERLAY */
-  --pinto-music-overlay: rgba(0, 0, 0, 0.5);         /* Overlay oscuro */
-  --pinto-music-overlay-light: rgba(0, 0, 0, 0.3);   /* Overlay claro */
-  --pinto-music-overlay-dark: rgba(0, 0, 0, 0.8);    /* Overlay intenso */
-  --pinto-music-overlay-white: rgba(255, 255, 255, 0.9); /* Overlay blanco */
+  /* ===== COLORES DE BORDER - TEMA CLARO ===== */
+  --music-border-light-theme: #E5E7EB; /* Border tema claro */
+  --music-border-light-theme-dark: #D1D5DB; /* Border más oscuro tema claro */
+  --music-border-light-theme-subtle: #F3F4F6; /* Border sutil tema claro */
 
-  /* GRADIENTES */
-  --pinto-music-gradient-green: linear-gradient(135deg, #1DB954, #1ED760);
-  --pinto-music-gradient-dark: linear-gradient(135deg, #121212, #1A1A1A);
-  --pinto-music-gradient-light: linear-gradient(135deg, #FFFFFF, #F8F9FA);
-  --pinto-music-gradient-overlay: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8));
-  --pinto-music-gradient-overlay-light: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.4));
+  /* ===== COLORES DE OVERLAY ===== */
+  --music-overlay: rgba(0, 0, 0, 0.5);         /* Overlay oscuro */
+  --music-overlay-light: rgba(0, 0, 0, 0.25);  /* Overlay claro */
+  --music-overlay-dark: rgba(0, 0, 0, 0.75);   /* Overlay intenso */
+  --music-overlay-white: rgba(255, 255, 255, 0.9); /* Overlay blanco */
+  --music-overlay-modal: rgba(0, 0, 0, 0.6);   /* Overlay para modales */
+  --music-overlay-tooltip: rgba(0, 0, 0, 0.8); /* Overlay para tooltips */
 
-  /* SOMBRAS TEMA OSCURO */
-  --pinto-music-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --pinto-music-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --pinto-music-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --pinto-music-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  /* ===== GRADIENTES ===== */
+  --music-gradient-green: linear-gradient(135deg, #1DB954 0%, #1ED760 100%);
+  --music-gradient-green-vertical: linear-gradient(180deg, #1DB954 0%, #169C46 100%);
+  --music-gradient-dark: linear-gradient(135deg, #121212 0%, #1A1A1A 100%);
+  --music-gradient-light: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  --music-gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  --music-gradient-overlay-light: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  --music-gradient-card: linear-gradient(145deg, #181818 0%, #1F1F1F 100%);
+  --music-gradient-button: linear-gradient(135deg, #1DB954 0%, #1ED760 100%);
 
-  /* SOMBRAS TEMA CLARO */
-  --pinto-music-shadow-sm-light: 0 2px 4px rgba(0, 0, 0, 0.08);
-  --pinto-music-shadow-md-light: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --pinto-music-shadow-lg-light: 0 8px 24px rgba(0, 0, 0, 0.16);
-  --pinto-music-shadow-xl-light: 0 16px 48px rgba(0, 0, 0, 0.20);
+  /* ===== SOMBRAS - TEMA OSCURO ===== */
+  --music-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --music-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --music-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --music-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --music-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --music-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  --music-shadow-focus: 0 0 0 3px rgba(29, 185, 84, 0.4);
 
-  /* COLORES ADICIONALES */
-  --pinto-music-purple: #8B5CF6;          /* Púrpura para podcasts */
-  --pinto-music-orange: #FF6B35;          /* Naranja para highlights */
-  --pinto-music-blue: #4A90E2;            /* Azul para links */
-  --pinto-music-yellow: #F59E0B;          /* Amarillo para notificaciones */
-  --pinto-music-pink: #EC4899;            /* Rosa para like/corazón */
+  /* ===== SOMBRAS - TEMA CLARO ===== */
+  --music-shadow-xs-light: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --music-shadow-sm-light: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --music-shadow-md-light: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --music-shadow-lg-light: 0 8px 24px rgba(0, 0, 0, 0.16);
+  --music-shadow-xl-light: 0 16px 48px rgba(0, 0, 0, 0.20);
+  --music-shadow-inner-light: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  --music-shadow-focus-light: 0 0 0 3px rgba(29, 185, 84, 0.3);
 
-  /* TRANSPARENCIAS */
-  --pinto-music-alpha-10: rgba(255, 255, 255, 0.1);
-  --pinto-music-alpha-20: rgba(255, 255, 255, 0.2);
-  --pinto-music-alpha-30: rgba(255, 255, 255, 0.3);
-  --pinto-music-alpha-40: rgba(255, 255, 255, 0.4);
-  --pinto-music-alpha-50: rgba(255, 255, 255, 0.5);
+  /* ===== COLORES ADICIONALES ===== */
+  --music-purple: #8B5CF6;          /* Púrpura para podcasts */
+  --music-purple-light: #A78BFA;    /* Púrpura claro */
+  --music-purple-dark: #7C3AED;     /* Púrpura oscuro */
+  --music-orange: #F59E0B;          /* Naranja para highlights */
+  --music-orange-light: #FCD34D;    /* Naranja claro */
+  --music-orange-dark: #D97706;     /* Naranja oscuro */
+  --music-blue: #3B82F6;            /* Azul para links */
+  --music-blue-light: #60A5FA;      /* Azul claro */
+  --music-blue-dark: #2563EB;       /* Azul oscuro */
+  --music-yellow: #F59E0B;          /* Amarillo para notificaciones */
+  --music-pink: #EC4899;            /* Rosa para like/corazón */
+  --music-pink-light: #F472B6;      /* Rosa claro */
+  --music-pink-dark: #DB2777;       /* Rosa oscuro */
+  --music-red: #EF4444;             /* Rojo alternativo */
+  --music-teal: #14B8A6;            /* Verde azulado */
+  --music-indigo: #6366F1;          /* Índigo */
 
-  /* TRANSPARENCIAS TEMA CLARO */
-  --pinto-music-alpha-black-10: rgba(0, 0, 0, 0.1);
-  --pinto-music-alpha-black-20: rgba(0, 0, 0, 0.2);
-  --pinto-music-alpha-black-30: rgba(0, 0, 0, 0.3);
-  --pinto-music-alpha-black-40: rgba(0, 0, 0, 0.4);
-  --pinto-music-alpha-black-50: rgba(0, 0, 0, 0.5);
+  /* ===== TRANSPARENCIAS - TEMA OSCURO ===== */
+  --music-alpha-5: rgba(255, 255, 255, 0.05);
+  --music-alpha-10: rgba(255, 255, 255, 0.1);
+  --music-alpha-15: rgba(255, 255, 255, 0.15);
+  --music-alpha-20: rgba(255, 255, 255, 0.2);
+  --music-alpha-25: rgba(255, 255, 255, 0.25);
+  --music-alpha-30: rgba(255, 255, 255, 0.3);
+  --music-alpha-40: rgba(255, 255, 255, 0.4);
+  --music-alpha-50: rgba(255, 255, 255, 0.5);
+  --music-alpha-60: rgba(255, 255, 255, 0.6);
+  --music-alpha-70: rgba(255, 255, 255, 0.7);
 
-  /* VARIABLES DE TRANSICIÓN */
-  --pinto-music-transition-fast: 0.1s ease;
-  --pinto-music-transition-normal: 0.2s ease;
-  --pinto-music-transition-slow: 0.3s ease;
-  --pinto-music-transition-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* ===== TRANSPARENCIAS - TEMA CLARO ===== */
+  --music-alpha-black-5: rgba(0, 0, 0, 0.05);
+  --music-alpha-black-10: rgba(0, 0, 0, 0.1);
+  --music-alpha-black-15: rgba(0, 0, 0, 0.15);
+  --music-alpha-black-20: rgba(0, 0, 0, 0.2);
+  --music-alpha-black-25: rgba(0, 0, 0, 0.25);
+  --music-alpha-black-30: rgba(0, 0, 0, 0.3);
+  --music-alpha-black-40: rgba(0, 0, 0, 0.4);
+  --music-alpha-black-50: rgba(0, 0, 0, 0.5);
+  --music-alpha-black-60: rgba(0, 0, 0, 0.6);
+  --music-alpha-black-70: rgba(0, 0, 0, 0.7);
 
-  /* VARIABLES DE ESPACIADO */
-  --pinto-music-spacing-xs: 4px;
-  --pinto-music-spacing-sm: 8px;
-  --pinto-music-spacing-md: 16px;
-  --pinto-music-spacing-lg: 24px;
-  --pinto-music-spacing-xl: 32px;
-  --pinto-music-spacing-xxl: 48px;
+  /* ===== VARIABLES DE TRANSICIÓN ===== */
+  --music-transition-fast: 0.15s ease;
+  --music-transition-normal: 0.2s ease;
+  --music-transition-slow: 0.3s ease;
+  --music-transition-slower: 0.5s ease;
+  --music-transition-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --music-transition-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --music-transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* VARIABLES DE BORDER RADIUS */
-  --pinto-music-radius-sm: 4px;
-  --pinto-music-radius-md: 8px;
-  --pinto-music-radius-lg: 12px;
-  --pinto-music-radius-xl: 16px;
-  --pinto-music-radius-full: 50%;
+  /* ===== VARIABLES DE ESPACIADO ===== */
+  --music-spacing-xs: 4px;
+  --music-spacing-sm: 8px;
+  --music-spacing-md: 16px;
+  --music-spacing-lg: 24px;
+  --music-spacing-xl: 32px;
+  --music-spacing-xxl: 48px;
+  --music-spacing-xxxl: 64px;
+  --music-spacing-xxxxl: 96px;
 
-  /* VARIABLES DE TYPOGRAPHY */
-  --pinto-music-font-weight-light: 300;
-  --pinto-music-font-weight-normal: 400;
-  --pinto-music-font-weight-medium: 500;
-  --pinto-music-font-weight-semibold: 600;
-  --pinto-music-font-weight-bold: 700;
-  --pinto-music-font-weight-extrabold: 800;
+  /* ===== VARIABLES DE BORDER RADIUS ===== */
+  --music-radius-xs: 2px;
+  --music-radius-sm: 4px;
+  --music-radius-md: 8px;
+  --music-radius-lg: 12px;
+  --music-radius-xl: 16px;
+  --music-radius-xxl: 24px;
+  --music-radius-full: 50%;
+  --music-radius-pill: 9999px;
 
-  /* VARIABLES DE Z-INDEX */
-  --pinto-music-z-dropdown: 1000;
-  --pinto-music-z-modal: 1050;
-  --pinto-music-z-tooltip: 1100;
-  --pinto-music-z-notification: 1200;
+  /* ===== VARIABLES DE TYPOGRAPHY ===== */
+  --music-font-weight-thin: 100;
+  --music-font-weight-light: 300;
+  --music-font-weight-normal: 400;
+  --music-font-weight-medium: 500;
+  --music-font-weight-semibold: 600;
+  --music-font-weight-bold: 700;
+  --music-font-weight-extrabold: 800;
+  --music-font-weight-black: 900;
 
-  /* VARIABLES DE SIDEBAR - TEMA OSCURO */
-  --pinto-music-sidebar-width: 280px;
-  --pinto-music-sidebar-collapsed-width: 72px;
-  --pinto-music-sidebar-bg: var(--pinto-music-black);
-  --pinto-music-sidebar-border: var(--pinto-music-border);
+  /* ===== VARIABLES DE FONT SIZE ===== */
+  --music-text-xs: 12px;
+  --music-text-sm: 14px;
+  --music-text-base: 16px;
+  --music-text-lg: 18px;
+  --music-text-xl: 20px;
+  --music-text-2xl: 24px;
+  --music-text-3xl: 30px;
+  --music-text-4xl: 36px;
+  --music-text-5xl: 48px;
 
-  /* VARIABLES DE SIDEBAR - TEMA CLARO */
-  --pinto-music-sidebar-bg-light: var(--pinto-music-white);
-  --pinto-music-sidebar-border-light: var(--pinto-music-border-light-theme);
+  /* ===== VARIABLES DE LINE HEIGHT ===== */
+  --music-leading-none: 1;
+  --music-leading-tight: 1.25;
+  --music-leading-snug: 1.375;
+  --music-leading-normal: 1.5;
+  --music-leading-relaxed: 1.625;
+  --music-leading-loose: 2;
 
-  /* VARIABLES DE HEADER - TEMA OSCURO */
-  --pinto-music-header-height: 64px;
-  --pinto-music-header-bg: var(--pinto-music-black);
-  --pinto-music-header-border: var(--pinto-music-border);
+  /* ===== VARIABLES DE Z-INDEX ===== */
+  --music-z-hide: -1;
+  --music-z-base: 0;
+  --music-z-docked: 10;
+  --music-z-dropdown: 1000;
+  --music-z-sticky: 1020;
+  --music-z-banner: 1030;
+  --music-z-overlay: 1040;
+  --music-z-modal: 1050;
+  --music-z-popover: 1060;
+  --music-z-skiplink: 1070;
+  --music-z-tooltip: 1080;
+  --music-z-notification: 1090;
 
-  /* VARIABLES DE HEADER - TEMA CLARO */
-  --pinto-music-header-bg-light: var(--pinto-music-white);
-  --pinto-music-header-border-light: var(--pinto-music-border-light-theme);
+  /* ===== VARIABLES DE LAYOUT - SIDEBAR ===== */
+  --music-sidebar-width: 280px;
+  --music-sidebar-collapsed-width: 72px;
+  --music-sidebar-mobile-width: 100vw;
+  --music-sidebar-bg: var(--music-black);
+  --music-sidebar-border: var(--music-border);
+  --music-sidebar-bg-light: var(--music-white);
+  --music-sidebar-border-light: var(--music-border-light-theme);
 
-  /* VARIABLES DE PLAYER - TEMA OSCURO */
-  --pinto-music-player-height: 90px;
-  --pinto-music-player-bg: var(--pinto-music-card-gray);
-  --pinto-music-player-border: var(--pinto-music-border);
+  /* ===== VARIABLES DE LAYOUT - HEADER ===== */
+  --music-header-height: 64px;
+  --music-header-height-mobile: 56px;
+  --music-header-bg: var(--music-dark-gray);
+  --music-header-border: var(--music-border);
+  --music-header-bg-light: var(--music-white);
+  --music-header-border-light: var(--music-border-light-theme);
 
-  /* VARIABLES DE PLAYER - TEMA CLARO */
-  --pinto-music-player-bg-light: var(--pinto-music-white);
-  --pinto-music-player-border-light: var(--pinto-music-border-light-theme);
+  /* ===== VARIABLES DE LAYOUT - PLAYER ===== */
+  --music-player-height: 90px;
+  --music-player-height-mobile: 80px;
+  --music-player-bg: var(--music-card-gray);
+  --music-player-border: var(--music-border);
+  --music-player-bg-light: var(--music-white);
+  --music-player-border-light: var(--music-border-light-theme);
 
-  /* VARIABLES DE CARDS - TEMA OSCURO */
-  --pinto-music-card-bg: var(--pinto-music-card-gray);
-  --pinto-music-card-hover-bg: var(--pinto-music-light-gray);
-  --pinto-music-card-radius: var(--pinto-music-radius-md);
-  --pinto-music-card-shadow: var(--pinto-music-shadow-md);
+  /* ===== VARIABLES DE COMPONENTES - CARDS ===== */
+  --music-card-bg: var(--music-card-gray);
+  --music-card-hover-bg: var(--music-light-gray);
+  --music-card-radius: var(--music-radius-md);
+  --music-card-shadow: var(--music-shadow-md);
+  --music-card-bg-light: var(--music-white);
+  --music-card-hover-bg-light: var(--music-light-card);
+  --music-card-shadow-light: var(--music-shadow-md-light);
 
-  /* VARIABLES DE CARDS - TEMA CLARO */
-  --pinto-music-card-bg-light: var(--pinto-music-white);
-  --pinto-music-card-hover-bg-light: var(--pinto-music-light-card);
-  --pinto-music-card-shadow-light: var(--pinto-music-shadow-md-light);
+  /* ===== VARIABLES DE COMPONENTES - BUTTONS ===== */
+  --music-button-height-sm: 32px;
+  --music-button-height-md: 40px;
+  --music-button-height-lg: 48px;
+  --music-button-primary-bg: var(--music-green);
+  --music-button-primary-hover: var(--music-green-light);
+  --music-button-primary-active: var(--music-green-dark);
+  --music-button-primary-text: var(--music-text-black);
+  --music-button-secondary-bg: transparent;
+  --music-button-secondary-border: var(--music-border-light);
+  --music-button-secondary-hover: var(--music-hover);
+  --music-button-secondary-text: var(--music-text-white);
+  --music-button-secondary-bg-light: transparent;
+  --music-button-secondary-border-light: var(--music-border-light-theme);
+  --music-button-secondary-hover-light: var(--music-hover-light-theme);
+  --music-button-secondary-text-light: var(--music-text-black);
 
-  /* VARIABLES DE BUTTONS - TEMA OSCURO */
-  --pinto-music-button-primary-bg: var(--pinto-music-green);
-  --pinto-music-button-primary-hover: var(--pinto-music-green-light);
-  --pinto-music-button-primary-active: var(--pinto-music-green-dark);
-  --pinto-music-button-secondary-bg: transparent;
-  --pinto-music-button-secondary-border: var(--pinto-music-border-light);
-  --pinto-music-button-secondary-hover: var(--pinto-music-hover);
+  /* ===== VARIABLES DE COMPONENTES - INPUTS ===== */
+  --music-input-height-sm: 32px;
+  --music-input-height-md: 40px;
+  --music-input-height-lg: 48px;
+  --music-input-bg: var(--music-card-gray);
+  --music-input-border: var(--music-border);
+  --music-input-focus-border: var(--music-green);
+  --music-input-placeholder: var(--music-text-muted);
+  --music-input-text: var(--music-text-white);
+  --music-input-bg-light: var(--music-white);
+  --music-input-border-light: var(--music-border-light-theme);
+  --music-input-placeholder-light: var(--music-text-dark-muted);
+  --music-input-text-light: var(--music-text-black);
 
-  /* VARIABLES DE BUTTONS - TEMA CLARO */
-  --pinto-music-button-secondary-bg-light: transparent;
-  --pinto-music-button-secondary-border-light: var(--pinto-music-border-light-theme);
-  --pinto-music-button-secondary-hover-light: var(--pinto-music-hover-light-theme);
+  /* ===== VARIABLES DE COMPONENTES - SCROLLBAR ===== */
+  --music-scrollbar-width: 8px;
+  --music-scrollbar-width-thin: 4px;
+  --music-scrollbar-track: var(--music-dark-gray);
+  --music-scrollbar-thumb: var(--music-text-muted);
+  --music-scrollbar-thumb-hover: var(--music-text-gray);
+  --music-scrollbar-track-light: var(--music-light-bg);
+  --music-scrollbar-thumb-light: var(--music-border-light-theme);
+  --music-scrollbar-thumb-hover-light: var(--music-text-dark-secondary);
 
-  /* VARIABLES DE INPUTS - TEMA OSCURO */
-  --pinto-music-input-bg: var(--pinto-music-card-gray);
-  --pinto-music-input-border: var(--pinto-music-border);
-  --pinto-music-input-focus-border: var(--pinto-music-green);
-  --pinto-music-input-placeholder: var(--pinto-music-text-muted);
+  /* ===== VARIABLES DE BREAKPOINTS ===== */
+  --music-breakpoint-sm: 640px;
+  --music-breakpoint-md: 768px;
+  --music-breakpoint-lg: 1024px;
+  --music-breakpoint-xl: 1280px;
+  --music-breakpoint-2xl: 1536px;
 
-  /* VARIABLES DE INPUTS - TEMA CLARO */
-  --pinto-music-input-bg-light: var(--pinto-music-white);
-  --pinto-music-input-border-light: var(--pinto-music-border-light-theme);
-  --pinto-music-input-placeholder-light: var(--pinto-music-text-dark-muted);
+  /* ===== VARIABLES DE ANIMACIONES ===== */
+  --music-animation-spin: spin 1s linear infinite;
+  --music-animation-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --music-animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --music-animation-bounce: bounce 1s infinite;
 
-  /* VARIABLES DE SCROLLBAR - TEMA OSCURO */
-  --pinto-music-scrollbar-width: 8px;
-  --pinto-music-scrollbar-track: var(--pinto-music-dark-gray);
-  --pinto-music-scrollbar-thumb: var(--pinto-music-text-muted);
-  --pinto-music-scrollbar-thumb-hover: var(--pinto-music-text-gray);
+  /* ===== VARIABLES DE BACKDROP FILTER ===== */
+  --music-backdrop-blur-sm: blur(4px);
+  --music-backdrop-blur-md: blur(8px);
+  --music-backdrop-blur-lg: blur(16px);
+  --music-backdrop-blur-xl: blur(24px);
+}
 
-  /* VARIABLES DE SCROLLBAR - TEMA CLARO */
-  --pinto-music-scrollbar-track-light: var(--pinto-music-light-bg);
-  --pinto-music-scrollbar-thumb-light: var(--pinto-music-border-light-theme);
-  --pinto-music-scrollbar-thumb-hover-light: var(--pinto-music-text-dark-secondary);
+/* ===== KEYFRAMES PARA ANIMACIONES ===== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* ===== UTILIDADES DE SCROLLBAR ===== */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--music-scrollbar-thumb) var(--music-scrollbar-track);
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: var(--music-scrollbar-width);
+  height: var(--music-scrollbar-width);
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--music-scrollbar-track);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--music-scrollbar-thumb);
+  border-radius: var(--music-radius-full);
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--music-scrollbar-thumb-hover);
+}
+
+// ===== SISTEMA DE TEMAS -  MUSIC =====
+// Importar las variables base desde tu archivo anterior
+
+/* ===== CLASES BASE DE TEMA ===== */
+.theme-light {
+  --current-bg-primary: var(--music-white);
+  --current-bg-secondary: var(--music-light-bg);
+  --current-bg-card: var(--music-light-card);
+  --current-bg-elevated: var(--music-light-elevated);
+  --current-text-primary: var(--music-text-dark-primary);
+  --current-text-secondary: var(--music-text-dark-secondary);
+  --current-text-muted: var(--music-text-dark-muted);
+  --current-text-subtle: var(--music-text-dark-subtle);
+  --current-border: var(--music-border-light-theme);
+  --current-border-subtle: var(--music-border-light-theme-subtle);
+  --current-hover: var(--music-hover-light-theme);
+  --current-hover-intense: var(--music-hover-light-theme-intense);
+  --current-active: var(--music-active-light-theme);
+  --current-shadow: var(--music-shadow-md-light);
+  --current-shadow-lg: var(--music-shadow-lg-light);
+  --current-sidebar-bg: var(--music-sidebar-bg-light);
+  --current-header-bg: var(--music-header-bg-light);
+  --current-player-bg: var(--music-player-bg-light);
+  --current-scrollbar-track: var(--music-scrollbar-track-light);
+  --current-scrollbar-thumb: var(--music-scrollbar-thumb-light);
+  --current-input-bg: var(--music-input-bg-light);
+  --current-input-text: var(--music-input-text-light);
+  --current-input-placeholder: var(--music-input-placeholder-light);
+}
+
+.theme-dark {
+  --current-bg-primary: var(--music-dark-gray);
+  --current-bg-secondary: var(--music-medium-gray);
+  --current-bg-card: var(--music-card-gray);
+  --current-bg-elevated: var(--music-elevated-gray);
+  --current-text-primary: var(--music-text-white);
+  --current-text-secondary: var(--music-text-gray);
+  --current-text-muted: var(--music-text-muted);
+  --current-text-subtle: var(--music-text-subtle);
+  --current-border: var(--music-border);
+  --current-border-subtle: var(--music-border-subtle);
+  --current-hover: var(--music-hover);
+  --current-hover-intense: var(--music-hover-light);
+  --current-active: var(--music-active);
+  --current-shadow: var(--music-shadow-md);
+  --current-shadow-lg: var(--music-shadow-lg);
+  --current-sidebar-bg: var(--music-sidebar-bg);
+  --current-header-bg: var(--music-header-bg);
+  --current-player-bg: var(--music-player-bg);
+  --current-scrollbar-track: var(--music-scrollbar-track);
+  --current-scrollbar-thumb: var(--music-scrollbar-thumb);
+  --current-input-bg: var(--music-input-bg);
+  --current-input-text: var(--music-input-text);
+  --current-input-placeholder: var(--music-input-placeholder);
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.app {
+  background: var(--current-bg-primary);
+  color: var(--current-text-primary);
+  transition: background-color var(--music-transition-normal),
+              color var(--music-transition-normal);
+}
+
+.container {
+  background: var(--current-bg-primary);
+  color: var(--current-text-primary);
+}
+
+.content {
+  background: var(--current-bg-primary);
+  --background: var(--current-bg-primary);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  background: var(--current-sidebar-bg);
+  border-right: 1px solid var(--current-border);
+  width: var(--music-sidebar-width);
+  transition: all var(--music-transition-normal);
+
+  &.collapsed {
+    width: var(--music-sidebar-collapsed-width);
+  }
+
+  &.mobile {
+    width: var(--music-sidebar-mobile-width);
+  }
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: var(--music-spacing-sm) var(--music-spacing-md);
+  color: var(--current-text-secondary);
+  text-decoration: none;
+  border-radius: var(--music-radius-md);
+  margin: var(--music-spacing-xs);
+  transition: all var(--music-transition-fast);
+
+  &:hover {
+    background: var(--current-hover);
+    color: var(--current-text-primary);
+  }
+
+  &.active {
+    background: var(--music-selected);
+    color: var(--music-green);
+  }
+
+  ion-icon {
+    margin-right: var(--music-spacing-sm);
+    font-size: 20px;
+  }
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--current-header-bg);
+  border-bottom: 1px solid var(--current-border);
+  height: var(--music-header-height);
+  backdrop-filter: var(--music-backdrop-blur-md);
+  --background: transparent;
+  --border-width: 0;
+
+  @media (max-width: 768px) {
+    height: var(--music-header-height-mobile);
+  }
+}
+
+.toolbar {
+  --background: transparent;
+  --color: var(--current-text-primary);
+  --border-width: 0;
+}
+
+/* ===== BOTONES ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--music-radius-pill);
+  font-weight: var(--music-font-weight-semibold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--music-transition-fast);
+  position: relative;
+  overflow: hidden;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Tamaños de botones
+.btn-sm {
+  height: var(--music-button-height-sm);
+  padding: 0 var(--music-spacing-md);
+  font-size: var(--music-text-sm);
+}
+
+.btn-md {
+  height: var(--music-button-height-md);
+  padding: 0 var(--music-spacing-lg);
+  font-size: var(--music-text-base);
+}
+
+.btn-lg {
+  height: var(--music-button-height-lg);
+  padding: 0 var(--music-spacing-xl);
+  font-size: var(--music-text-lg);
+}
+
+// Variantes de botones
+.btn-primary {
+  background: var(--music-button-primary-bg);
+  color: var(--music-button-primary-text);
+
+  &:hover:not(:disabled) {
+    background: var(--music-button-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--current-shadow);
+  }
+
+  &:active {
+    background: var(--music-button-primary-active);
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background: var(--current-bg-card);
+  color: var(--current-text-primary);
+  border: 1px solid var(--current-border);
+
+  &:hover:not(:disabled) {
+    background: var(--current-hover-intense);
+    border-color: var(--music-green);
+  }
+
+  &:active {
+    background: var(--current-active);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--current-text-secondary);
+
+  &:hover:not(:disabled) {
+    background: var(--current-hover);
+    color: var(--current-text-primary);
+  }
+
+  &:active {
+    background: var(--current-active);
+  }
+}
+
+.btn-danger {
+  background: var(--music-error);
+  color: var(--music-text-white);
+
+  &:hover:not(:disabled) {
+    background: var(--music-error-light);
+  }
+
+  &:active {
+    background: var(--music-error-dark);
+  }
+}
+
+.btn-icon-only {
+  width: var(--music-button-height-md);
+  padding: 0;
+  border-radius: var(--music-radius-full);
+
+  &.btn-sm {
+    width: var(--music-button-height-sm);
+  }
+
+  &.btn-lg {
+    width: var(--music-button-height-lg);
+  }
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--current-bg-card);
+  border-radius: var(--music-card-radius);
+  box-shadow: var(--current-shadow);
+  padding: var(--music-spacing-md);
+  transition: all var(--music-transition-normal);
+  border: 1px solid var(--current-border-subtle);
+
+  &:hover {
+    background: var(--current-hover);
+    box-shadow: var(--current-shadow-lg);
+    transform: translateY(-2px);
+  }
+}
+
+.card-elevated {
+  background: var(--current-bg-elevated);
+  box-shadow: var(--current-shadow-lg);
+}
+
+.card-header {
+  padding: var(--music-spacing-lg);
+  border-bottom: 1px solid var(--current-border-subtle);
+
+  h2, h3 {
+    margin: 0;
+    color: var(--current-text-primary);
+  }
+}
+
+.card-content {
+  padding: var(--music-spacing-lg);
+}
+
+.card-footer {
+  padding: var(--music-spacing-md) var(--music-spacing-lg);
+  border-top: 1px solid var(--current-border-subtle);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--music-spacing-sm);
+}
+
+/* ===== MUSIC CARDS (Específicas para música) ===== */
+.music-card {
+  @extend .card;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  .music-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--music-radius-md);
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--music-transition-normal);
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--music-overlay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--music-transition-normal);
+
+      .play-btn {
+        width: 48px;
+        height: 48px;
+        background: var(--music-green);
+        border-radius: var(--music-radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--music-black);
+        font-size: 20px;
+        box-shadow: var(--music-shadow-lg);
+      }
+    }
+  }
+
+  &:hover {
+    .music-cover {
+      img {
+        transform: scale(1.05);
+      }
+
+      .play-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  .music-info {
+    padding: var(--music-spacing-md) 0 0;
+
+    .music-title {
+      color: var(--current-text-primary);
+      font-weight: var(--music-font-weight-semibold);
+      margin-bottom: var(--music-spacing-xs);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .music-artist {
+      color: var(--current-text-secondary);
+      font-size: var(--music-text-sm);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+/* ===== SWIPER/SLIDES ===== */
+.slides {
+  --bullet-background: var(--current-text-muted);
+  --bullet-background-active: var(--music-green);
+
+  .swiper-pagination-bullet {
+    background: var(--current-text-muted);
+    opacity: 0.5;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--music-green);
+    opacity: 1;
+  }
+}
+
+.slide {
+  padding: var(--music-spacing-md);
+}
+
+/* ===== INPUTS Y FORMULARIOS ===== */
+.input {
+  background: var(--current-input-bg);
+  border: 1px solid var(--current-border);
+  border-radius: var(--music-radius-md);
+  padding: 0 var(--music-spacing-md);
+  color: var(--current-input-text);
+  font-size: var(--music-text-base);
+  transition: all var(--music-transition-fast);
+
+  &::placeholder {
+    color: var(--current-input-placeholder);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--music-green);
+    box-shadow: var(--music-shadow-focus);
+  }
+
+  &.input-sm {
+    height: var(--music-input-height-sm);
+    font-size: var(--music-text-sm);
+  }
+
+  &.input-md {
+    height: var(--music-input-height-md);
+  }
+
+  &.input-lg {
+    height: var(--music-input-height-lg);
+    font-size: var(--music-text-lg);
+  }
+}
+
+.search-input {
+  @extend .input;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--music-spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  padding-left: 44px;
+}
+
+/* ===== LISTAS ===== */
+.list {
+  background: var(--current-bg-card);
+  border-radius: var(--music-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--current-border-subtle);
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: var(--music-spacing-md);
+  border-bottom: 1px solid var(--current-border-subtle);
+  transition: background-color var(--music-transition-fast);
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--current-hover);
+  }
+
+  &.active {
+    background: var(--music-selected);
+    color: var(--music-green);
+  }
+}
+
+.list-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--music-radius-md);
+  margin-right: var(--music-spacing-md);
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.list-content {
+  flex: 1;
+  min-width: 0;
+
+  .title {
+    color: var(--current-text-primary);
+    font-weight: var(--music-font-weight-medium);
+    margin-bottom: var(--music-spacing-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .subtitle {
+    color: var(--current-text-secondary);
+    font-size: var(--music-text-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.list-actions {
+  display: flex;
+  gap: var(--music-spacing-xs);
+  flex-shrink: 0;
+}
+
+/* ===== PLAYER ===== */
+.player {
+  background: var(--current-player-bg);
+  border-top: 1px solid var(--current-border);
+  height: var(--music-player-height);
+  backdrop-filter: var(--music-backdrop-blur-md);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--music-z-sticky);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--music-spacing-lg);
+
+  @media (max-width: 768px) {
+    height: var(--music-player-height-mobile);
+    padding: 0 var(--music-spacing-md);
+  }
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+
+  .player-cover {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--music-radius-md);
+    margin-right: var(--music-spacing-md);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .player-details {
+    flex: 1;
+    min-width: 0;
+
+    .track-title {
+      color: var(--current-text-primary);
+      font-weight: var(--music-font-weight-medium);
+      margin-bottom: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .track-artist {
+      color: var(--current-text-secondary);
+      font-size: var(--music-text-sm);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--music-spacing-md);
+  flex: 1;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    gap: var(--music-spacing-sm);
+  }
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: var(--music-spacing-sm);
+  flex: 1;
+  justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+/* ===== MODALES Y OVERLAYS ===== */
+.modal {
+  --background: var(--current-bg-primary);
+  --color: var(--current-text-primary);
+
+  .modal-wrapper {
+    background: var(--current-bg-elevated);
+    border-radius: var(--music-radius-xl);
+    box-shadow: var(--current-shadow-lg);
+  }
+}
+
+.backdrop {
+  background: var(--music-overlay-modal);
+  backdrop-filter: var(--music-backdrop-blur-sm);
+}
+
+/* ===== BADGES Y CHIPS ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--music-spacing-xs) var(--music-spacing-sm);
+  border-radius: var(--music-radius-pill);
+  font-size: var(--music-text-xs);
+  font-weight: var(--music-font-weight-medium);
+
+  &.primary {
+    background: var(--music-green);
+    color: var(--music-black);
+  }
+
+  &.secondary {
+    background: var(--current-bg-elevated);
+    color: var(--current-text-secondary);
+    border: 1px solid var(--current-border);
+  }
+
+  &.success {
+    background: var(--music-success);
+    color: var(--music-white);
+  }
+
+  &.warning {
+    background: var(--music-warning);
+    color: var(--music-black);
+  }
+
+  &.error {
+    background: var(--music-error);
+    color: var(--music-white);
+  }
+}
+
+/* ===== PROGRESS BARS ===== */
+.progress {
+  width: 100%;
+  height: 4px;
+  background: var(--current-border);
+  border-radius: var(--music-radius-pill);
+  overflow: hidden;
+
+  .progress-fill {
+    height: 100%;
+    background: var(--music-green);
+    border-radius: var(--music-radius-pill);
+    transition: width var(--music-transition-normal);
+  }
+
+  &.interactive {
+    cursor: pointer;
+    height: 6px;
+
+    &:hover {
+      height: 8px;
+
+      .progress-fill {
+        background: var(--music-green-light);
+      }
+    }
+  }
+}
+
+/* ===== TOOLTIPS ===== */
+.tooltip {
+  background: var(--music-overlay-tooltip);
+  color: var(--music-white);
+  padding: var(--music-spacing-xs) var(--music-spacing-sm);
+  border-radius: var(--music-radius-md);
+  font-size: var(--music-text-xs);
+  backdrop-filter: var(--music-backdrop-blur-md);
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--current-scrollbar-thumb) var(--current-scrollbar-track);
+
+  &::-webkit-scrollbar {
+    width: var(--music-scrollbar-width);
+    height: var(--music-scrollbar-width);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--current-scrollbar-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--current-scrollbar-thumb);
+    border-radius: var(--music-radius-full);
+
+    &:hover {
+      background: var(--music-scrollbar-thumb-hover);
+    }
+  }
+}
+
+/* ===== UTILIDADES DE ESPACIADO ===== */
+.p-xs { padding: var(--music-spacing-xs); }
+.p-sm { padding: var(--music-spacing-sm); }
+.p-md { padding: var(--music-spacing-md); }
+.p-lg { padding: var(--music-spacing-lg); }
+.p-xl { padding: var(--music-spacing-xl); }
+
+.m-xs { margin: var(--music-spacing-xs); }
+.m-sm { margin: var(--music-spacing-sm); }
+.m-md { margin: var(--music-spacing-md); }
+.m-lg { margin: var(--music-spacing-lg); }
+.m-xl { margin: var(--music-spacing-xl); }
+
+/* ===== UTILIDADES DE TEXTO ===== */
+.text-primary { color: var(--current-text-primary); }
+.text-secondary { color: var(--current-text-secondary); }
+.text-muted { color: var(--current-text-muted); }
+.text-green { color: var(--music-green); }
+.text-error { color: var(--music-error); }
+
+.text-xs { font-size: var(--music-text-xs); }
+.text-sm { font-size: var(--music-text-sm); }
+.text-base { font-size: var(--music-text-base); }
+.text-lg { font-size: var(--music-text-lg); }
+.text-xl { font-size: var(--music-text-xl); }
+
+.font-thin { font-weight: var(--music-font-weight-thin); }
+.font-light { font-weight: var(--music-font-weight-light); }
+.font-normal { font-weight: var(--music-font-weight-normal); }
+.font-medium { font-weight: var(--music-font-weight-medium); }
+.font-semibold { font-weight: var(--music-font-weight-semibold); }
+.font-bold { font-weight: var(--music-font-weight-bold); }
+
+/* ===== UTILIDADES DE FONDO ===== */
+.bg-primary { background: var(--current-bg-primary); }
+.bg-secondary { background: var(--current-bg-secondary); }
+.bg-card { background: var(--current-bg-card); }
+.bg-elevated { background: var(--current-bg-elevated); }
+.bg-green { background: var(--music-green); }
+
+/* ===== ANIMACIONES Y TRANSICIONES ===== */
+.transition-smooth {
+  transition: all var(--music-transition-normal);
+}
+
+.transition-fast {
+  transition: all var(--music-transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--current-shadow-lg);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop {
+    display: none !important;
+  }
+
+  .show-desktop {
+    display: block !important;
+  }
 }
