@@ -1,118 +1,140 @@
-<!-- <ion-content [style.background-color]="temaActual.contentBg">
-  <div class="center-wrapper" [style.background]="temaActual.background">
-    <div class="card-overlay" [style.background]="temaActual.cardBackground" [style.border]="'1px solid ' + temaActual.cardBorder" [style.box-shadow]="temaActual.cardShadow">
+<ion-content [style.background-color]="temaActual.contentBg" class="intro-page-content">
+  <div class="background-gradient" [style.background]="temaActual.background"></div>
+  <div class="background-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
 
-      <div class="card-image-wrapper">
-        <div class="image-container" [style.background]="temaActual.gradientPrimary">
-          <img src="https://cdn-icons-png.flaticon.com/512/5662/5662049.png" class="card-image" alt="Music icon" [style.filter]="'drop-shadow(0 8px 24px ' + temaActual.imageGlow + ')'"/>
-          <div class="image-overlay"></div>
-        </div>
-      </div>
+  <!-- Musical notes background -->
+  <div class="musical-notes">
+    <div class="note note-1">🎵</div>
+    <div class="note note-2">🎶</div>
+    <div class="note note-3">🎵</div>
+    <div class="note note-4">🎶</div>
+    <div class="note note-5">🎵</div>
+  </div>
 
-      <div class="card-content">
-        <div class="card-header">
-          <h2 class="card-title" [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'" [style.background]="temaActual.textGradient" [style.-webkit-background-clip]="'text'" [style.-webkit-text-fill-color]="'transparent'" [style.background-clip]="'text'">
-            Music
-          </h2>
-          <p class="card-description"
-            [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-medium)'">
-            in the home
-          </p>
-        </div>
+  <!-- Particle/Star background -->
+  <div class="particles-background">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+    <div class="particle particle-6"></div>
+    <div class="particle particle-7"></div>
+    <div class="particle particle-8"></div>
+  </div>
 
-        <div class="card-actions">
-          <ion-button class="primary-button" [style.--background]="temaActual.buttonBackground" [style.--background-hover]="temaActual.buttonHover" [style.--color]="'var(--music-text-black)'" size="small" (click)="goBack()">
-            <span class="button-text">IR AL HOME</span>
-          </ion-button>
+  <!-- Abstract flowing elements -->
+  <div class="abstract-elements">
+    <div class="abstract-line line-1"></div>
+    <div class="abstract-line line-2"></div>
+    <div class="abstract-circle circle-1"></div>
+  </div>
 
-          <ion-button class="btn" fill="outline" size="small" (click)="goBack()" [style.--color]="temaActual.textColor" [style.--border-color]="temaActual.borderColor">
-            Volver
-          </ion-button>
-        </div>
-      </div>
-
-      <div class="card-glow" [style.background]="'radial-gradient(circle, ' + temaActual.glowColor + ' 0%, transparent 70%)'">
-      </div>
+  <!-- Nuevo contenedor para los elementos destacados flotantes -->
+  <div class="floating-featured-items">
+    <!-- Iteramos sobre el array iconMusics para crear cada burbuja -->
+    <div
+      class="featured-item"
+      *ngFor="let iconMusic of iconMusics; let i = index"
+      [ngStyle]="getFloatingItemStyle(i)"
+    >
+      <img [src]="iconMusic.image" [alt]="iconMusic.text" class="featured-image" />
     </div>
   </div>
-</ion-content> -->
 
+  <div class="main-wrapper">
+    <div class="hero-section">
+      <h1 class="hero-title ion-text-center" [style.color]="temaActual.titleColor">
+        No es solo música, es un sentimiento.
+      </h1>
+      <p class="hero-subtitle ion-text-center" [style.color]="temaActual.descriptionColor">
+        Cada nota cuenta una historia.
+      </p>
+    </div>
 
+    <div class="cards-container">
+      <swiper-container
+        #swiper
+        effect="cards"
+        grab-cursor="true"
+        class="cards-swiper"
+        [cardsEffect]="{
+          slideShadows: true,
+          transformEl: null,
+          rotate: true,
+          perSlideOffset: 8,
+          perSlideRotate: 2
+        }"
+        autoplay-delay="5000"
+        autoplay-disable-on-interaction="false"
+        rewind="true"
+        pagination="true"
+        keyboard="true"
+      >
+        <swiper-slide
+          *ngFor="let carta of cartas; let i = index"
+          class="card-slide"
+          [style.background]="temaActual.cardBackground"
+          [style.border]="'1px solid ' + temaActual.cardBorder"
+          [style.box-shadow]="temaActual.cardShadow"
+        >
+          <!-- Nueva capa para la imagen de fondo de la tarjeta -->
+          <div
+            *ngIf="carta.backgroundImage"
+            class="card-background-image"
+            [style.background-image]="'url(' + carta.backgroundImage + ')'"
+          ></div>
 
-<ion-content [style.background-color]="temaActual.contentBg" class="cards-content">
-  <div class="cards-container" [style.background]="temaActual.background">
-    <swiper-container
-      #swiper
-      effect="cards"
-      grab-cursor="true"
-      class="cards-swiper"
-      [cardsEffect]="{
-        slideShadows: true,
-        transformEl: null,
-        rotate: true,
-        perSlideOffset: 8,
-        perSlideRotate: 2
-      }"
-      autoplay-delay="5000">
+          <!-- Gradient overlay ahora con un fondo fijo en CSS -->
+          <div class="card-gradient-overlay"></div>
 
-      <swiper-slide
-        *ngFor="let carta of cartas; let i = index"
-        class="card-slide"
-        [style.background]="temaActual.cardBackground"
-        [style.border]="'1px solid ' + temaActual.cardBorder"
-        [style.box-shadow]="temaActual.cardShadow">
-
-        <!-- Gradient overlay usando el color de la carta individual -->
-        <div class="card-gradient-overlay" [style.background]="carta.background"></div>
-
-        <div class="card-content">
-          <div class="card-header">
-            <h1 class="card-title"
+          <div class="card-content">
+            <div class="">
+              <h1
+                class="card-title"
                 [style.color]="carta.color"
                 [style.font-weight]="'var(--music-font-weight-bold)'"
-                [style.text-shadow]="'0 2px 8px rgba(0,0,0,0.3)'">
-              {{ carta.title }}
-            </h1>
-            <p class="card-subtitle"
-              [style.color]="carta.color"
-              [style.font-weight]="'var(--music-font-weight-medium)'"
-              [style.opacity]="'0.9'">
-              {{ carta.subtitle }}
-            </p>
+                [style.text-shadow]="'0 2px 8px rgba(0,0,0,0.3)'"
+              >
+                {{ carta.title }}
+              </h1>
+            </div>
+
+            <div class="card-actions">
+              <ion-button
+                class="primary-button card-button"
+                [style.--background]="'rgba(255,255,255,0.2)'"
+                [style.--background-hover]="'rgba(255,255,255,0.3)'"
+                [style.--color]="carta.color"
+                [style.backdrop-filter]="'blur(10px)'"
+                [style.border]="'1px solid rgba(255,255,255,0.3)'"
+                size="small"
+                (click)="onCardAction(i)"
+              >
+                <span class="button-text" [style.color]="carta.color">
+                  {{ carta.buttonText }}
+                </span>
+              </ion-button>
+            </div>
           </div>
 
-          <div class="card-actions">
-            <ion-button
-              class="primary-button card-button"
-              [style.--background]="'rgba(255,255,255,0.2)'"
-              [style.--background-hover]="'rgba(255,255,255,0.3)'"
-              [style.--color]="carta.color"
-              [style.backdrop-filter]="'blur(10px)'"
-              [style.border]="'1px solid rgba(255,255,255,0.3)'"
-              size="small"
-              (click)="onCardAction(i)">
-              <span class="button-text" [style.color]="carta.color">
-                {{ carta.buttonText }}
-              </span>
-            </ion-button>
+          <!-- Decorative elements usando el tema actual -->
+          <div class="card-decoration">
+            <div class="decoration-circle" [style.background]="'rgba(255,255,255,0.1)'"></div>
+            <div class="decoration-circle-small" [style.background]="'rgba(255,255,255,0.05)'"></div>
           </div>
-        </div>
 
-        <!-- Decorative elements usando el tema actual -->
-        <div class="card-decoration">
-          <div class="decoration-circle"
-              [style.background]="'rgba(255,255,255,0.1)'">
-          </div>
-          <div class="decoration-circle-small"
-              [style.background]="'rgba(255,255,255,0.05)'">
-          </div>
-        </div>
-
-        <!-- Card glow effect usando el color de cada carta -->
-        <div class="card-glow"
-            [style.background]="'radial-gradient(circle, ' + carta.background.split(',')[0].replace('linear-gradient(135deg, ', '') + '40 0%, transparent 70%)'">
-        </div>
-      </swiper-slide>
-    </swiper-container>
+          <!-- Card glow effect usando el color de cada carta -->
+          <div
+            class="card-glow"
+            [style.background]="'radial-gradient(circle, ' + getCardMainColor(carta.background) + '40 0%, transparent 70%)'"
+          ></div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
   </div>
 </ion-content>
