@@ -1,30 +1,58 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen class="intro-page-content login-content">
+<!-- Background elements from intro page -->
+<div class="background-gradient"></div>
+<div class="background-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+<div class="musical-notes">
+  <div class="note note-1">🎵</div>
+  <div class="note note-2">🎶</div>
+  <div class="note note-3">🎵</div>
+  <div class="note note-4">🎶</div>
+  <div class="note note-5">🎵</div>
+</div>
+<div class="particles-background">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+  <div class="particle particle-5"></div>
+  <div class="particle particle-6"></div>
+  <div class="particle particle-7"></div>
+  <div class="particle particle-8"></div>
+</div>
+<div class="abstract-elements">
+  <div class="abstract-line line-1"></div>
+  <div class="abstract-line line-2"></div>
+  <div class="abstract-circle circle-1"></div>
+</div>
 
-<ion-content>
-  <figure class="profile-default-image ion-text-center">
-    <p>Ingresa tus datos</p>
-    <img src="assets/images/user.png">
-  </figure>
-  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
-    <ion-item>
+<div class="main-wrapper login-main-wrapper">
+  <div class="hero-section login-hero-section">
+    <figure class="profile-default-image ion-text-center">
+      <img src="../../assets/images/the_ama.jpg" alt="User Profile">
+      <p class="login-intro-text">Ingresa tus datos</p>
+    </figure>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)" class="login-form">
+    <ion-item class="login-input-item">
       <ion-input label="Email" labelPlacement="stacked" placeholder="Ingresar correo electrónico" formControlName="email"></ion-input>
     </ion-item>
-    <div ><!-- agregar estilos a los mensajes de validacion -->
+    <div class="validation-messages">
       <div *ngFor="let validation of validation_messages.email">
         <ion-text color="danger" *ngIf="loginForm.get('email')?.hasError(validation.type) && loginForm.get('email')?.dirty">
           {{ validation.message }}
         </ion-text>
       </div>
     </div>
-    <ion-item>
-      <ion-input label="Contraseña" labelPlacement="stacked" placeholder="Ingresar contraseña" formControlName="password"></ion-input>
+    <ion-item class="login-input-item">
+      <ion-input label="Contraseña" labelPlacement="stacked" placeholder="Ingresar contraseña" formControlName="password" type="password"></ion-input>
     </ion-item>
 
-    <div ><!-- agregar estilos a los mensajes de validacion -->
+    <div class="validation-messages">
       <div *ngFor="let validation of validation_messages.password">
         <ion-text color="danger" *ngIf="loginForm.get('password')?.hasError(validation.type) && loginForm.get('password')?.dirty">
           {{ validation.message }}
@@ -32,10 +60,10 @@
       </div>
     </div>
 
-    <ion-button expand="full" shape="round" color="success" type="submit" [disabled]="! loginForm.valid">
+    <ion-button expand="full" shape="round" color="success" type="submit" [disabled]="! loginForm.valid" class="login-button">
       Login
     </ion-button>
   </form>
+  {{error_message}}
+</div>
 </ion-content>
-
-//mejorar el diseño del login

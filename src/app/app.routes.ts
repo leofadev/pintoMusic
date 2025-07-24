@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { introGuard } from './guards/intro.guard';
+import { authGuard } from './guards/auth.guard';
 
+/* Agregar el guard de login  */
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage), canActivate: [introGuard]
+    loadComponent: () => import('./home/home.page').then((m) => m.HomePage), canActivate: [introGuard, authGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'intro',
     pathMatch: 'full',
   },
   {
@@ -17,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage), canActivate: [introGuard]
   },
 
 ];

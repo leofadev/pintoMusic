@@ -48,7 +48,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "SONIDO",
       backgroundImage:
-        "https://i.scdn.co/image/ab67616d0000b273715c7ef6d90b86cad6f81df5", // Imagen de ejemplo
+        "../../assets/images/MOOD.jpg", // Imagen de ejemplo
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "RITMO",
       backgroundImage:
-        "https://i.scdn.co/image/ab67616d0000b27370063c9ac5c5ae15632c56fb", // Imagen de ejemplo
+        "../../assets/images/OCTAVO.jpg", // Imagen de ejemplo
     },
     {
       id: 3,
@@ -66,7 +66,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "MELODÍA",
       backgroundImage:
-        "https://i.scdn.co/image/ab67616d0000b273017f7f0b78acc1b124f4cb80", // Imagen de ejemplo
+        "../../assets/images/LIT_KILLAH.jpg", // Imagen de ejemplo
     },
     {
       id: 4,
@@ -75,44 +75,44 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#333333",
       buttonText: "COMENZAR",
       backgroundImage:
-        "https://i.scdn.co/image/ab67616d00001e02623c93ba10c967d7ff00836d", // Imagen de ejemplo
+        "../../assets/images/ZOMBIE.jpg", // Imagen de ejemplo
     },
   ]
 
   // Array de íconos de música para flotar
   iconMusics: IconMusic[] = [
     {
-      image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSUfNSmvdd17uEoLBtiANlgHLk0Qo6xs2SMiMpOjp-yViSd9RaVnNpboch4lqLYMgwIR2iWVB0maclV4oCxUjj8Q409U6e-NLGZ4-uFnv0XsQ",
-      text: "Music Note",
+      image: "../../assets/images/the_ama.jpg",
+      text: "the_ama",
     },
     {
       image:
-        "https://i.scdn.co/image/ab67616d0000b2736790b3128792f83536251ae8",
-      text: "Electric Guitar",
+        "../../assets/images/MOOD.jpg",
+      text: "MOOD",
     },
     {
       image:
-        "https://i.scdn.co/image/ab67616d0000b2738d8d1be23d97d7eb738354d1",
-      text: "Headphones",
+        "../../assets/images/CAOS.jpg",
+      text: "CAOS",
     },
     {
       image:
-        "https://i.scdn.co/image/ab67616d00001e02717ee51a0cc4b2d7cf48a2e2",
-      text: "Rock Guitar",
+        "../../assets/images/RIP_OZA.jpg",
+      text: "RIP_OZA",
     },
     {
-      image: "https://i.scdn.co/image/ab67616d00001e02b10b7d12263bbf46e24283ee",
-      text: "Music Icon",
-    },
-    {
-      image:
-        "https://i.scdn.co/image/ab67616d00001e02976971afd4d083676e7b5d51",
-      text: "Audio Gear",
+      image: "../../assets/images/TRAP_GOD.jpg",
+      text: "TRAP_GOD",
     },
     {
       image:
-        "https://i.scdn.co/image/ab67616d0000b27302ab14a478db794bb0ba3cc7",
-      text: "Winged Guitar",
+        "../../assets/images/PLAYER.jpg",
+      text: "PLAYER",
+    },
+    {
+      image:
+        "../../assets/images/SAN_HALLOWEEN.jpg",
+      text: "SAN_HALLOWEEN",
     },
   ]
 

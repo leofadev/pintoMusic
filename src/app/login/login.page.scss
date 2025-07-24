@@ -1,7 +1,1329 @@
-.profile-default-image img{
+/* ===== ESTILOS GLOBALES REFACTORIZADOS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  overflow: hidden; /* Mantenemos overflow hidden para que el fondo no se mueva */
+  background: #121212;
+  color: #ffffff;
+}
+
+/* ===== CONTENEDOR PRINCIPAL (ion-content) ===== */
+.intro-page-content {
+  --background: transparent;
+  padding: 0;
+  position: absolute; /* Ocupa todo el body */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Ocupa el 100% de la altura del viewport */
+  overflow: hidden; /* CAMBIADO: NO PERMITE NINGÚN DESPLAZAMIENTO EN ION-CONTENT */
+  display: flex; /* Para centrar el contenido principal */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centra verticalmente el contenido */
+  z-index: 0;
+}
+
+/* ===== FONDO DEGRADADO ANIMADO ===== */
+.background-gradient {
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* CAMBIADO: Usa unidades de viewport */
+  height: 100vh; /* CAMBIADO: Usa unidades de viewport */
+  background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+  animation: backgroundPan 15s ease infinite alternate;
+  background-size: 200% 200%;
+  z-index: -1;
+}
+
+@keyframes backgroundPan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ===== FORMAS FLOTANTES DE FONDO ===== */
+.background-shapes {
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* CAMBIADO: Usa unidades de viewport */
+  height: 100vh; /* CAMBIADO: Usa unidades de viewport */
+  overflow: hidden;
+  z-index: calc(-1 + 1);
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+  filter: blur(24px);
+  background: rgba(255, 255, 255, 0.15);
+  animation: floatShape 15s ease-in-out infinite alternate;
+}
+
+.shape-1 {
+  width: 350px;
+  height: 350px;
+  top: 5%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 450px;
+  height: 450px;
+  bottom: 0%;
+  right: 5%;
+  animation-delay: 5s;
+}
+
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  top: 30%;
+  left: 55%;
+  animation-delay: 10s;
+}
+
+@keyframes floatShape {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, -25px) scale(1.07);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* ===== NOTAS MUSICALES FLOTANTES ===== */
+.musical-notes {
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* CAMBIADO: Usa unidades de viewport */
+  height: 100vh; /* CAMBIADO: Usa unidades de viewport */
+  pointer-events: none;
+  overflow: hidden;
+  z-index: calc(-1 + 2);
+}
+
+.note {
+  position: absolute;
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.05);
+  animation: floatNote 20s linear infinite;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.note-1 {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+.note-2 {
+  top: 30%;
+  left: 20%;
+  font-size: 3rem;
+  animation-delay: 4s;
+}
+.note-3 {
+  top: 50%;
+  left: 40%;
+  font-size: 4rem;
+  animation-delay: 8s;
+}
+.note-4 {
+  top: 70%;
+  left: 60%;
+  animation-delay: 12s;
+}
+.note-5 {
+  top: 20%;
+  left: 80%;
+  font-size: 2.8rem;
+  animation-delay: 16s;
+}
+
+@keyframes floatNote {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-120vh) translateX(80px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ===== PARTÍCULAS/ESTRELLAS DE FONDO ===== */
+.particles-background {
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* CAMBIADO: Usa unidades de viewport */
+  height: 100vh; /* CAMBIADO: Usa unidades de viewport */
+  pointer-events: none;
+  overflow: hidden;
+  z-index: calc(-1 + 3);
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: twinkle 10s infinite ease-in-out alternate;
+}
+
+.particle-1 {
+  width: 3px;
+  height: 3px;
+  top: 15%;
+  left: 25%;
+  animation-delay: 0s;
+}
+.particle-2 {
+  width: 2px;
+  height: 2px;
+  top: 30%;
+  left: 70%;
+  animation-delay: 2s;
+}
+.particle-3 {
+  width: 4px;
+  height: 4px;
+  top: 50%;
+  left: 10%;
+  animation-delay: 4s;
+}
+.particle-4 {
+  width: 2.5px;
+  height: 2.5px;
+  top: 70%;
+  left: 85%;
+  animation-delay: 6s;
+}
+.particle-5 {
+  width: 3.5px;
+  height: 3.5px;
+  top: 5%;
+  left: 50%;
+  animation-delay: 8s;
+}
+.particle-6 {
+  width: 2px;
+  height: 2px;
+  top: 40%;
+  left: 40%;
+  animation-delay: 10s;
+}
+.particle-7 {
+  width: 3px;
+  height: 3px;
+  top: 80%;
+  left: 30%;
+  animation-delay: 12s;
+}
+.particle-8 {
+  width: 4.5px;
+  height: 4.5px;
+  top: 20%;
+  left: 90%;
+  animation-delay: 14s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+/* ===== ELEMENTOS ABSTRACTOS FLUYENTES ===== */
+.abstract-elements {
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* CAMBIADO: Usa unidades de viewport */
+  height: 100vh; /* CAMBIADO: Usa unidades de viewport */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.abstract-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  animation: flowLine 25s linear infinite;
+}
+
+.line-1 {
+  width: 150px;
+  height: 4px;
+  top: 20%;
+  left: -10%;
+  transform: rotate(30deg);
+  animation-delay: 0s;
+}
+
+.line-2 {
+  width: 200px;
+  height: 3px;
+  bottom: 15%;
+  right: -10%;
+  transform: rotate(-45deg);
+  animation-delay: 10s;
+}
+
+.abstract-circle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  animation: flowCircle 30s linear infinite;
+}
+
+.circle-1 {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: -10%;
+  animation-delay: 5s;
+}
+
+@keyframes flowLine {
+  0% {
+    transform: translateX(-100%) rotate(var(--rotation, 0deg));
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(200%) rotate(var(--rotation, 0deg));
+    opacity: 0;
+  }
+}
+
+@keyframes flowCircle {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: translate(100vw, -50vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ===== WRAPPER PRINCIPAL PARA HERO Y CARDS (No relevante para login, pero mantenido) ===== */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding: 24px;
+  z-index: 10;
+}
+
+/* ===== SECCIÓN HERO (No relevante para login, pero mantenido) ===== */
+.hero-section {
+  text-align: center;
+  margin-bottom: 32px;
+  color: #ffffff;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+  background: linear-gradient(45deg, #004403, #f7f7f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 0.9;
+  animation: fadeInUp 0.3s ease-out 0.2s backwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== ELEMENTOS DESTACADOS FLOTANTES (No relevante para login, pero mantenido) ===== */
+.floating-featured-items {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: calc(0 + 5);
+}
+
+.featured-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  animation: floatBubble 25s linear infinite;
+  opacity: 0;
+}
+
+.featured-item:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(100vh) translateX(0px) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(80vh) translateX(20px) rotate(10deg) scale(1);
+  }
+  50% {
+    transform: translateY(30vh) translateX(-30px) rotate(-10deg) scale(1.1);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(10vh) translateX(10px) rotate(5deg) scale(0.9);
+  }
+  100% {
+    transform: translateY(-20vh) translateX(0px) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.featured-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.featured-image:hover {
+  transform: scale(1.05);
+}
+
+/* ===== EFECTO HALO PARA ELEMENTOS DESTACADOS ===== */
+.featured-item::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.featured-item:hover::after {
+  opacity: 1;
+}
+
+/* ===== CONTENEDOR DE CARDS (No relevante para login, pero mantenido) ===== */
+.cards-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.cards-swiper {
+  width: 320px;
+  height: 500px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+}
+
+/* ===== ESTILOS DE CARD (No relevante para login, pero mantenido) ===== */
+.card-slide {
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #181818;
+}
+
+/* ===== IMAGEN DE FONDO DE CARD (No relevante para login, pero mantenido) ===== */
+.card-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 24px;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* ===== OVERLAY DE DEGRADADO (No relevante para login, pero mantenido) ===== */
+.card-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  z-index: calc(0 + 1);
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* ===== CONTENIDO DE CARD (No relevante para login, pero mantenido) ===== */
+.card-content {
+  padding: 40px 28px 32px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: calc(0 + 3);
+  text-align: center;
+}
+
+.card-header {
+  margin-bottom: 32px;
+}
+
+.card-10 {
+  /* Asumiendo que esta es la clase para el título de la tarjeta */
+  font-size: 2.5rem; /* 40px */
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  background: linear-gradient(45deg, #ffffff, #f7f7f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+/* ===== ACCIONES DE CARD (No relevante para login, pero mantenido) ===== */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.primary-button {
+  border-radius: 12px;
+  padding: 16px 28px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+.primary-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  background: inherit;
+  filter: blur(8px);
+  opacity: 0.4;
+  z-index: -1;
+  transition: opacity 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.button-text {
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== ELEMENTOS DECORATIVOS (No relevante para login, pero mantenido) ===== */
+.card-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: calc(0 + 2);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.decoration-circle {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  top: -90px;
+  right: -90px;
+  opacity: 0.5;
+  filter: blur(2px);
+  background: rgba(255, 255, 255, 0.1);
+  animation: floatCircle1 10s ease-in-out infinite;
+}
+
+.decoration-circle-small {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  bottom: -60px;
+  left: -60px;
+  opacity: 0.3;
+  filter: blur(2px);
+  background: rgba(255, 255, 255, 0.05);
+  animation: floatCircle2 12s ease-in-out infinite reverse;
+}
+
+@keyframes floatCircle1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10px, 10px);
+  }
+}
+
+@keyframes floatCircle2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, -10px);
+  }
+}
+
+/* ===== EFECTO GLOW DE CARD (No relevante para login, pero mantenido) ===== */
+.card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.2;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: pulse 5s ease-in-out infinite;
+  background: rgba(29, 185, 84, 0.8);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* ===== EFECTOS ADICIONALES DE CARD (No relevante para login, pero mantenido) ===== */
+.card-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.03) 100%);
+  z-index: calc(0 + 2);
+  pointer-events: none;
+}
+
+/* ===== HOVER PARA CARD COMPLETA (No relevante para login, pero mantenido) ===== */
+.card-slide:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.card-slide:hover .card-glow {
+  opacity: 0.4;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* ===== ESTILOS DE PAGINACIÓN SWIPER (No relevante para login, pero mantenido) ===== */
+.swiper-pagination {
+  bottom: 10px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  transition: all 0.2s ease;
+  margin: 0 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff;
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ===== DISEÑO RESPONSIVO ===== */
+/* Ajustes para pantallas hasta 1024px (típico breakpoint de escritorio/laptop) */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 40px;
+  }
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+  }
+  .shape-2 {
+    width: 400px;
+    height: 400px;
+  }
+  .shape-3 {
+    width: 250px;
+    height: 250px;
+  }
+  .note {
+    font-size: 3rem;
+  }
+  .note-2 {
+    font-size: 2.5rem;
+  }
+  .note-3 {
+    font-size: 3.5rem;
+  }
+  .note-5 {
+    font-size: 2.3rem;
+  }
+  .abstract-line.line-1 {
+    width: 120px;
+  }
+  .abstract-line.line-2 {
+    width: 160px;
+  }
+  .abstract-circle.circle-1 {
+    width: 80px;
+    height: 80px;
+  }
+  .featured-image {
+    width: 70px;
+    height: 70px;
+  }
+  .featured-item {
+    font-size: 13px;
+  }
+  .card-10 {
+    font-size: 2.2rem;
+  } /* 35.2px */
+}
+
+/* Ajustes para pantallas hasta 768px (típico breakpoint de tablet) */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  .main-wrapper {
+    padding: 16px; /* Reducir el padding general */
+  }
+  .featured-item .featured-image {
+    width: 60px;
+    height: 60px;
+  }
+  .featured-item .featured-text {
+    font-size: 12px;
+  }
+  .cards-swiper {
+    width: 280px;
+    height: 450px;
+    padding-bottom: 30px; /* Ajustar padding para paginación */
+  }
+  .card-10 {
+    /* Asumiendo que esta es la clase para el título de la tarjeta */
+    font-size: 2rem; /* 32px */
+  }
+  .card-content {
+    padding: 32px 24px 24px 24px;
+  }
+  .shape-1 {
+    width: 250px;
+    height: 250px;
+  }
+  .shape-2 {
+    width: 350px;
+    height: 350px;
+  }
+  .shape-3 {
+    width: 200px;
+    height: 200px;
+  }
+  .note {
+    font-size: 2.8rem;
+  }
+  .note-2 {
+    font-size: 2.2rem;
+  }
+  .note-3 {
+    font-size: 3.2rem;
+  }
+  .note-5 {
+    font-size: 2rem;
+  }
+  .abstract-line.line-1 {
+    width: 100px;
+  }
+  .abstract-line.line-2 {
+    width: 140px;
+  }
+  .abstract-circle.circle-1 {
+    width: 70px;
+    height: 70px;
+  }
+  .card-glow {
+    width: 350px;
+    height: 350px;
+    filter: blur(60px);
+  }
+}
+
+/* Ajustes para pantallas hasta 480px (típico breakpoint de teléfono grande) */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  .featured-item .featured-image {
+    width: 50px;
+    height: 50px;
+  }
+  .featured-item .featured-text {
+    font-size: 10px;
+  }
+  .cards-container {
+    padding: 16px;
+  }
+  .cards-swiper {
+    width: calc(100vw - 40px); /* Ancho más dinámico */
+    max-width: 280px;
+    height: 420px;
+    padding-bottom: 20px;
+  }
+  .card-10 {
+    font-size: 1.8rem; /* 28.8px */
+  }
+  .card-content {
+    padding: 24px 20px 20px 20px;
+  }
+  .primary-button {
+    padding: 12px 20px; /* Ajustar padding del botón */
+  }
+  .button-text {
+    font-size: 14px;
+  }
+  .shape-1 {
+    width: 200px;
+    height: 200px;
+  }
+  .shape-2 {
+    width: 300px;
+    height: 300px;
+  }
+  .shape-3 {
+    width: 150px;
+    height: 150px;
+  }
+  .note {
+    font-size: 2.5rem;
+  }
+  .note-2 {
+    font-size: 2rem;
+  }
+  .note-3 {
+    font-size: 3rem;
+  }
+  .note-5 {
+    font-size: 1.8rem;
+  }
+  .abstract-line.line-1 {
+    width: 80px;
+  }
+  .abstract-line.line-2 {
+    width: 120px;
+  }
+  .abstract-circle.circle-1 {
+    width: 60px;
+    height: 60px;
+  }
+  .card-glow {
+    width: 300px;
+    height: 300px;
+    filter: blur(50px);
+  }
+}
+
+/* Ajustes para pantallas hasta 360px (típico breakpoint de teléfono pequeño) */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 26px;
+  }
+  .hero-subtitle {
+    font-size: 12px;
+  }
+  .cards-swiper {
+    height: 380px;
+    width: calc(100vw - 30px); /* Asegurar que quepa en pantallas muy pequeñas */
+  }
+  .card-10 {
+    font-size: 1.5rem; /* 24px */
+  }
+  .card-content {
+    padding: 20px 16px 16px 16px;
+  }
+  .primary-button {
+    padding: 10px 16px;
+  }
+  .button-text {
+    font-size: 12px;
+  }
+  .shape-1 {
+    width: 150px;
+    height: 150px;
+  }
+  .shape-2 {
+    width: 250px;
+    height: 250px;
+  }
+  .shape-3 {
+    width: 100px;
+    height: 100px;
+  }
+  .note {
+    font-size: 2rem;
+  }
+  .note-2 {
+    font-size: 1.8rem;
+  }
+  .note-3 {
+    font-size: 2.5rem;
+  }
+  .note-5 {
+    font-size: 1.5rem;
+  }
+  .abstract-line.line-1 {
+    width: 60px;
+  }
+  .abstract-line.line-2 {
+    width: 100px;
+  }
+  .abstract-circle.circle-1 {
+    width: 50px;
+    height: 50px;
+  }
+  .card-glow {
+    width: 250px;
+    height: 250px;
+    filter: blur(40px);
+  }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas si es necesario */
+@media (max-width: 320px) {
+  .hero-title {
+    font-size: 22px;
+  }
+  .hero-subtitle {
+    font-size: 11px;
+  }
+  .cards-swiper {
+    height: 350px;
+    width: calc(100vw - 20px);
+  }
+  .card-10 {
+    font-size: 1.3rem; /* ~20.8px */
+  }
+  .card-content {
+    padding: 16px 12px 12px 12px;
+  }
+  .primary-button {
+    padding: 8px 12px;
+  }
+  .button-text {
+    font-size: 11px;
+  }
+}
+
+/* ===== OPTIMIZACIÓN PARA MÓVILES - ANIMACIONES SUAVES ===== */
+.intro-page-content {
+  will-change: auto;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Optimizar todas las animaciones para móviles */
+.shape,
+.note,
+.particle,
+.abstract-line,
+.abstract-circle,
+.featured-item {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Optimización específica para Swiper */
+.cards-swiper {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-slide {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Reducir complejidad de animaciones en móviles */
+@media (max-width: 768px) {
+  .shape {
+    animation-duration: 20s !important;
+    filter: blur(16px) !important;
+  }
+
+  .note {
+    animation-duration: 25s !important;
+  }
+
+  .particle {
+    animation-duration: 15s !important;
+  }
+
+  .featured-item {
+    animation-duration: 30s !important;
+  }
+
+  .card-glow {
+    filter: blur(40px) !important;
+    animation-duration: 8s !important;
+  }
+}
+
+/* Specific styles for login page */
+.login-toolbar {
+  --background: transparent;
+  --color: #ffffff;
+  --border-width: 0;
+  --min-height: 56px;
+  padding-top: var(--ion-safe-area-top);
+  position: fixed; /* CAMBIADO: Para que se mantenga fijo en el viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Ensure it's above background elements */
+}
+
+.login-content {
+  --background: transparent; /* Ensure ion-content background is transparent to show the divs below */
+}
+
+.login-main-wrapper {
+  height: 100%; /* CAMBIADO: Ocupa el 100% de la altura de su padre (ion-content) */
+  min-height: unset; /* Aseguramos que no haya un min-height que lo fuerce a ser más grande */
+  justify-content: center; /* Center content vertically */
+  padding-top: 80px; /* Adjust for header */
+  padding-bottom: 24px;
+  position: relative; /* Ensure it's above background elements */
+  z-index: 10;
+  flex-grow: 1; /* Permite que ocupe el espacio disponible en el contenedor flex */
+  flex-shrink: 1; /* CAMBIADO: Permite que se encoja si el espacio es limitado */
+  display: flex; /* Asegura que las propiedades flex se apliquen */
+  flex-direction: column; /* Mantiene el contenido apilado */
+  align-items: center; /* Centra horizontalmente */
+}
+
+.login-hero-section {
+  margin-bottom: 24px; /* Adjust margin for login form */
+}
+
+.login-intro-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 16px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.profile-default-image img {
   border-radius: 50%;
   height: 100px;
   width: 100px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-// darle estilos al login
+.login-form {
+  width: 100%;
+  max-width: 400px; /* Limit form width */
+  background: rgba(24, 24, 24, 0.8); /* Darker, semi-transparent background for the form */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-input-item {
+  --background: transparent; /* Make item background transparent */
+  --highlight-background: transparent;
+  --border-color: rgba(255, 255, 255, 0.2); /* Subtle border for inputs */
+  --border-width: 1px;
+  --border-style: solid;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --inner-padding-end: 0;
+  --inner-border-width: 0;
+  --min-height: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.login-input-item.item-has-focus {
+  --border-color: #004403; /* Highlight color on focus */
+  box-shadow: 0 0 0 2px #004403;
+}
+
+.login-input-item ion-input {
+  --color: #ffffff; /* Text color */
+  --placeholder-color: rgba(255, 255, 255, 0.6);
+  --placeholder-opacity: 1;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.login-input-item ion-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.validation-messages {
+  margin-top: -8px; /* Adjust spacing */
+  margin-bottom: 8px;
+  padding-left: 16px; /* Align with input */
+}
+
+.validation-messages ion-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ff6b6b !important; /* Brighter red for visibility */
+  text-shadow: 0 0 4px rgba(255, 107, 107, 0.5);
+}
+
+.login-button {
+  --background: linear-gradient(45deg, #004403, #1db954); /* Green gradient for button */
+  --background-activated: linear-gradient(45deg, #005505, #22cc66);
+  --background-focused: linear-gradient(45deg, #005505, #22cc66);
+  --background-hover: linear-gradient(45deg, #005505, #22cc66);
+  --color: #ffffff;
+  --border-radius: 12px;
+  height: 50px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+.login-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.login-button[disabled] {
+  opacity: 0.6;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* Optimización para móviles */
+@media (max-width: 768px) {
+  .login-main-wrapper {
+    padding-top: 60px; /* Adjust for smaller header */
+  }
+  .login-form {
+    padding: 20px;
+    gap: 12px;
+  }
+  .login-input-item {
+    --min-height: 45px;
+  }
+  .login-input-item ion-input {
+    font-size: 15px;
+  }
+  .login-intro-text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-main-wrapper {
+    padding-top: 50px;
+  }
+  .login-form {
+    padding: 16px;
+    gap: 10px;
+  }
+  .login-input-item {
+    --min-height: 40px;
+  }
+  .login-input-item ion-input {
+    font-size: 14px;
+  }
+  .login-intro-text {
+    font-size: 18px;
+  }
+}
