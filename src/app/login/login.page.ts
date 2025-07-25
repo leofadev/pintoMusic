@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { IonicModule, NavController } from '@ionic/angular';
+import { IonicModule, NavController, ToastController  } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -18,12 +18,8 @@ export class LoginPage implements OnInit {
   error_message: string = '';
   validation_messages ={
     email:[
-      {
-        type: 'required', message: 'El correo es obligatorio'
-      },
-      {
-        type: 'email', message: 'El correo no es valido'
-      }
+      { type: 'required', message: 'El correo es obligatorio' },
+      { type: 'email', message: 'El correo no es valido' }
     ],
     password: [
       { type: 'required', message: 'La contraseña es obligatoria' },
@@ -31,7 +27,7 @@ export class LoginPage implements OnInit {
     ]
   }
 
-  constructor( private formBuilder: FormBuilder, private AuthService: AuthService, private navCtrl: NavController ) {
+  constructor( private formBuilder: FormBuilder, private AuthService: AuthService, private navCtrl: NavController, private toastController: ToastController ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
         '',
@@ -56,11 +52,27 @@ export class LoginPage implements OnInit {
 
   loginUser(credentials: any){
     console.log(credentials);
-    this.AuthService.loginUser(credentials).then(res => {
+    this.AuthService.loginUser(credentials).then(async res => {
       this.error_message = '';
+      await this.showToast('Login exitoso', 'success');
       this.navCtrl.navigateForward('/home')
-    }).catch(error => {
+    }).catch(async error => {
       this.error_message = error;
+      await this.showToast(error, 'danger');
     })
+  }
+
+  goRegister(){
+    this.navCtrl.navigateForward('register');
+  }
+
+  async showToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      color: color,
+      position: 'top'
+    });
+    toast.present();
   }
 }

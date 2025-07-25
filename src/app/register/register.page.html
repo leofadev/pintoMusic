@@ -1,0 +1,86 @@
+<ion-content fullscreen class="intro-page-content register-content">
+<!-- Background elements from intro page -->
+<div class="background-gradient"></div>
+<div class="background-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+<div class="musical-notes">
+  <div class="note note-1">🎵</div>
+  <div class="note note-2">🎶</div>
+  <div class="note note-3">🎵</div>
+  <div class="note note-4">🎶</div>
+  <div class="note note-5">🎵</div>
+</div>
+<div class="particles-background">
+  <div class="particle particle-1"></div>
+  <div class="particle particle-2"></div>
+  <div class="particle particle-3"></div>
+  <div class="particle particle-4"></div>
+  <div class="particle particle-5"></div>
+  <div class="particle particle-6"></div>
+  <div class="particle particle-7"></div>
+  <div class="particle particle-8"></div>
+</div>
+<div class="abstract-elements">
+  <div class="abstract-line line-1"></div>
+  <div class="abstract-line line-2"></div>
+  <div class="abstract-circle circle-1"></div>
+</div>
+
+<div class="main-wrapper register-main-wrapper">
+
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)" class="register-form">
+    <ion-item class="register-input-item">
+      <ion-input label="Nombre" labelPlacement="stacked" placeholder="Ingresar nombre" formControlName="name"></ion-input>
+    </ion-item>
+    <div class="validation-messages">
+      <div *ngFor="let validation of validation_messages.name">
+        <ion-text color="danger" *ngIf="registerForm.get('name')?.hasError(validation.type) && registerForm.get('name')?.dirty">
+          {{ validation.message }}
+        </ion-text>
+      </div>
+    </div>
+    <ion-item class="register-input-item">
+      <ion-input label="Apellido" labelPlacement="stacked" placeholder="Ingresar apellido" formControlName="lastName"></ion-input>
+    </ion-item>
+    <div class="validation-messages">
+      <div *ngFor="let validation of validation_messages.lastName">
+        <ion-text color="danger" *ngIf="registerForm.get('lastName')?.hasError(validation.type) && registerForm.get('lastName')?.dirty">
+          {{ validation.message }}
+        </ion-text>
+      </div>
+    </div>
+    <ion-item class="register-input-item">
+      <ion-input label="Correo" labelPlacement="stacked" placeholder="Ingresar correo electrónico" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="validation-messages">
+      <div *ngFor="let validation of validation_messages.email">
+        <ion-text color="danger" *ngIf="registerForm.get('email')?.hasError(validation.type) && registerForm.get('email')?.dirty">
+          {{ validation.message }}
+        </ion-text>
+      </div>
+    </div>
+    <ion-item class="register-input-item">
+      <ion-input label="Contraseña" labelPlacement="stacked" placeholder="Ingresar contraseña" formControlName="password" type="password"></ion-input>
+    </ion-item>
+
+    <div class="validation-messages">
+      <div *ngFor="let validation of validation_messages.password">
+        <ion-text color="danger" *ngIf="registerForm.get('password')?.hasError(validation.type) && registerForm.get('password')?.dirty">
+          {{ validation.message }}
+        </ion-text>
+      </div>
+    </div>
+
+    <ion-button expand="full" shape="round" color="success" type="submit" [disabled]="! registerForm.valid" class="register-button">
+      Crear Cuenta
+    </ion-button>
+    <ion-button expand="full" shape="round" color="success" (click)="goToLogin()" class="register-button">
+      Iniciar Sesión
+    </ion-button>
+
+  </form>
+</div>
+</ion-content>
