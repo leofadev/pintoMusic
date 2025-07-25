@@ -1,0 +1,103 @@
+<ion-split-pane contentId = "main-content">
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar [style.--background]="temaActual.toolbarBg" [style.background]="temaActual.toolbarBg">
+      <ion-menu-toggle slot="end">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-menu-toggle>
+      <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--music-font-weight-bold)'">
+        Menú
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"
+    [style.background-color]="temaActual.contentBg"
+    [style.--background]="temaActual.contentBg"
+    [style.--color]="temaActual.textColor">
+
+    <!-- Lista de opciones del menú mejorada -->
+    <ion-list [style.background]="'transparent'" style="padding: 0;">
+      <ion-item
+      (click)="cambiarTema()"
+      button
+      [style.--color]="temaActual.textColor"
+      [style.--background]="'transparent'"
+      [style.border-radius]="temaActual.musicRadiusMd"
+      [style.margin-bottom]="temaActual.musicSpacingSm"
+      [style.box-shadow]="temaActual.shadow"
+      [style.border]="temaActual.borderColor + ' 1px solid'"
+      [style.transition]="temaActual.musicTransitionNormal"
+      [style.font-weight]="'var(--music-font-weight-medium)'"
+      [style.font-size]="temaActual.musicTextBase"
+      [style.background]="temaActual.hoverBackground"
+      >
+      <ion-label [style.color]="temaActual.textColor">Cambiar de tema</ion-label>
+      <ion-icon name="contrast" slot="start"></ion-icon>
+      </ion-item>
+
+      <ion-item
+      (click)="goToLogin()"
+      button
+      [style.--color]="temaActual.textColor"
+      [style.--background]="'transparent'"
+      [style.border-radius]="temaActual.musicRadiusMd"
+      [style.margin-bottom]="temaActual.musicSpacingSm"
+      [style.box-shadow]="temaActual.shadow"
+      [style.border]="temaActual.borderColor + ' 1px solid'"
+      [style.transition]="temaActual.musicTransitionNormal"
+      [style.font-weight]="'var(--music-font-weight-medium)'"
+      [style.font-size]="temaActual.musicTextBase"
+      [style.background]="temaActual.hoverBackground"
+      >
+      <ion-label [style.color]="temaActual.textColor">Ir a iniciar sesión</ion-label>
+      <ion-icon name="log-in-outline" slot="start"></ion-icon>
+      </ion-item>
+
+      <ion-item
+      (click)="goIntro()"
+      button
+      [style.--color]="temaActual.textColor"
+      [style.--background]="'transparent'"
+      [style.border-radius]="temaActual.musicRadiusMd"
+      [style.box-shadow]="temaActual.shadow"
+      [style.border]="temaActual.borderColor + ' 1px solid'"
+      [style.transition]="temaActual.musicTransitionNormal"
+      [style.font-weight]="'var(--music-font-weight-medium)'"
+      [style.font-size]="temaActual.musicTextBase"
+      [style.background]="temaActual.hoverBackground"
+      >
+      <ion-label [style.color]="temaActual.textColor">Ver intro</ion-label>
+      <ion-icon name="eye-outline" slot="start"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <!-- Separador visual -->
+    <ion-item-divider
+      [style.--background]="temaActual.borderColor"
+      [style.border-radius]="temaActual.musicRadiusMd"
+      [style.margin]="temaActual.musicSpacingMd + ' 0'"
+      [style.box-shadow]="temaActual.shadow"
+      [style.border]="temaActual.borderColor + ' 1px solid'"
+      [style.font-size]="temaActual.musicTextSm"
+      [style.font-weight]="'var(--music-font-weight-bold)'"
+    >
+      <ion-label [style.color]="temaActual.descriptionColor">Acciones</ion-label>
+    </ion-item-divider>
+
+    <!-- Botones de acción -->
+        <ion-button expand="block"
+      (click)="closeSession()"
+      [style.--background]="temaActual.musicError"
+      [style.--color]="temaActual.textColor"
+      [style.font-weight]="'var(--music-font-weight-bold)'"
+      [style.box-shadow]="temaActual.shadow"
+      style="margin-top: 16px;">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Cerrar sesión
+    </ion-button>
+  </ion-content>
+</ion-menu>
+  <ion-router-outlet id="main-content">
+
+  </ion-router-outlet>
+</ion-split-pane>

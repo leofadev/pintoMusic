@@ -141,7 +141,7 @@ export class RegisterPage implements OnInit {
   async showToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 3000,
+      duration: 2000,
       color: color,
       position: 'top'
     });

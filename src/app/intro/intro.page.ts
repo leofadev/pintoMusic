@@ -192,7 +192,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
 
   async goBack() {
     await this.storageService.set("introView", true)
-    this.router.navigateByUrl("/home")
+    this.router.navigateByUrl("/menu/home")
   }
 
   onCardAction(index: number) {

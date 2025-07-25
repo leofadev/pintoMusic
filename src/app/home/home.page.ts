@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService, Theme } from '../services/theme.service';
@@ -57,7 +57,7 @@ export class HomePage implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router) {}
+  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router, private navCtrl: NavController,) {}
 
   ngOnInit() {
     // Suscribirse a los cambios de tema
@@ -84,5 +84,9 @@ export class HomePage implements OnInit, OnDestroy {
   async goIntro(){
     await this.storageService.remove('introView');
     this.router.navigateByUrl("/intro");
+  }
+
+    goToLogin() {
+    this.navCtrl.navigateBack('/login');
   }
 }

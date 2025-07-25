@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
     this.AuthService.loginUser(credentials).then(async res => {
       this.error_message = '';
       await this.showToast('Login exitoso', 'success');
-      this.navCtrl.navigateForward('/home')
+      this.navCtrl.navigateForward('/menu/home')
     }).catch(async error => {
       this.error_message = error;
       await this.showToast(error, 'danger');
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
   async showToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 3000,
+      duration: 2000,
       color: color,
       position: 'top'
     });
