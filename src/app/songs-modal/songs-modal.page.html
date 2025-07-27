@@ -1,0 +1,240 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar
+    [style.--background]="temaActual.cardBackground"
+    [style.background]="temaActual.cardBackground"
+    [style.backdrop-filter]="temaActual.musicBackdropBlurMd"
+    [style.border-bottom]="'1px solid ' + temaActual.musicAlpha10"
+    [style.box-shadow]="temaActual.musicShadowSm"
+    [style.padding]="'12px'">
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <!-- Si existe el artista -->
+      <div *ngIf="artists; else tituloPorDefecto" style="display: flex; align-items: center; gap: 16px;">
+        <img [src]="artists.image"
+            [alt]="artists.name"
+            [style.width]="'56px'"
+            [style.height]="'56px'"
+            [style.border-radius]="temaActual.musicRadiusFull"
+            [style.object-fit]="'cover'"
+            [style.box-shadow]="temaActual.musicShadowMd" />
+
+        <div>
+          <h2
+            [style.background]="temaActual.textGradient"
+            [style.-webkit-background-clip]="'text'"
+            [style.background-clip]="'text'"
+            [style.-webkit-text-fill-color]="'transparent'"
+            [style.font-weight]="temaActual.musicFontWeightBold"
+            [style.font-size]="temaActual.musicTextXl"
+            [style.margin]="'0 0 4px 0'">
+            {{ artists.name }}
+          </h2>
+
+          <p
+            [style.color]="temaActual.descriptionColor"
+            [style.font-size]="temaActual.musicTextSm"
+            [style.margin]="'0 0 2px 0'">
+            Géneros: {{ artists.genres.join(', ') }}
+          </p>
+
+          <p
+            [style.color]="temaActual.descriptionColor"
+            [style.font-size]="temaActual.musicTextSm"
+            [style.margin]="'0'">
+            Popularidad: {{ artists.popularity }}%
+          </p>
+        </div>
+      </div>
+
+      <!-- Plantilla alternativa si no hay artista -->
+      <ng-template #tituloPorDefecto>
+        <ion-title
+            [style.background]="temaActual.textGradient"
+            [style.-webkit-background-clip]="'text'"
+            [style.background-clip]="'text'"
+            [style.-webkit-text-fill-color]="'transparent'"
+            [style.font-weight]="temaActual.musicFontWeightBold"
+            [style.font-size]="temaActual.musicText2xl"
+            [style.letter-spacing]="'-0.025em'">
+            🎵 Lista de Canciones
+        </ion-title>
+      </ng-template>
+
+      <!-- Botón de cerrar -->
+      <ion-buttons>
+        <ion-button
+          fill="clear"
+          (click)="closeModal()"
+          [style.border-radius]="temaActual.musicRadiusFull"
+          [style.transition]="'all ' + temaActual.musicTransitionNormal"
+          [style.backdrop-filter]="temaActual.musicBackdropBlurSm">
+          <ion-icon
+            name="close"
+            [style.color]="temaActual.textColor"
+            [style.font-size]="'1.5rem'">
+          </ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [style.background]="temaActual.background"
+  [style.--background]="temaActual.background"
+  [style.overflow-x]="'hidden'"
+  class="ion-padding-horizontal">
+  <!-- Estadísticas del playlist -->
+  <div
+    [style.background]="temaActual.cardBackground"
+    [style.border-radius]="temaActual.musicRadiusXl"
+    [style.padding]="temaActual.musicSpacingSm"
+    [style.margin]="temaActual.musicSpacingMd + ' 0'"
+    [style.box-shadow]="temaActual.cardShadow"
+    [style.border]="'1px solid ' + temaActual.musicAlpha10"
+    [style.backdrop-filter]="temaActual.musicBackdropBlurMd"
+    class="stats-card">
+
+  </div>
+  <!-- Lista de canciones mejorada -->
+  <ion-list
+    [style.background]="'transparent'"
+    [style.padding]="'0'">
+
+    <div
+      *ngFor="let song of songs; index as i; "
+      [style.background]="temaActual.cardBackground"
+      [style.border-radius]="temaActual.musicRadiusLg"
+      [style.margin-bottom]="temaActual.musicSpacingMd"
+      [style.box-shadow]="temaActual.musicShadowMd"
+      [style.border]="'1px solid ' + temaActual.musicAlpha5"
+      [style.backdrop-filter]="temaActual.musicBackdropBlurSm"
+      [style.transition]="'all ' + temaActual.musicTransitionNormal"
+      [style.overflow]="'hidden'"
+      [style.position]="'relative'"
+      class="song-card">
+
+
+      <div
+        [style.position]="'absolute'"
+        [style.top]="'0'"
+        [style.left]="'0'"
+        [style.width]="'4px'"
+        [style.height]="'100%'"
+        [style.background]="temaActual.gradientPrimary"
+        [style.z-index]="'2'"
+        class="playing-indicator">
+      </div>
+      <ion-item
+        [style.--background]="'transparent'"
+        [style.--color]="temaActual.textColor"
+        [style.padding]="temaActual.musicSpacingMd"
+        lines="none"
+        button>
+
+        <!-- Información de la canción -->
+        <ion-label [style.overflow]="'hidden'">
+          <h2
+            [style.color]="temaActual.titleColor"
+            [style.font-weight]="temaActual.musicFontWeightSemibold"
+            [style.font-size]="temaActual.musicTextLg"
+            [style.margin]="'0 0 6px 0'"
+            [style.line-height]="temaActual.musicLeadingTight"
+            [style.white-space]="'nowrap'"
+            [style.overflow]="'hidden'"
+            [style.text-overflow]="'ellipsis'">
+            {{ song.name }}
+          </h2>
+
+          <div [style.display]="'flex'" [style.align-items]="'center'" [style.gap]="temaActual.musicSpacingSm">
+            <p
+              [style.color]="temaActual.descriptionColor"
+              [style.font-size]="temaActual.musicTextSm"
+              [style.margin]="'0'"
+              [style.font-weight]="temaActual.musicFontWeightMedium">
+              {{ song.artist || 'Artista desconocido' }}
+            </p>
+
+            <span
+              *ngIf="song.duration_ms"
+              [style.color]="temaActual.musicTextMuted"
+              [style.font-size]="temaActual.musicTextXs"
+              [style.background]="temaActual.musicAlpha5"
+              [style.padding]="'2px 8px'"
+              [style.border-radius]="temaActual.musicRadiusPill"
+              [style.backdrop-filter]="temaActual.musicBackdropBlurSm">
+              {{ formatearDuracion(song.duration_ms) }}
+            </span>
+          </div>
+
+          <!-- Barra de progreso para canción actual -->
+          <div
+
+            [style.width]="'100%'"
+            [style.height]="'3px'"
+            [style.background]="temaActual.musicAlpha10"
+            [style.border-radius]="temaActual.musicRadiusPill"
+            [style.margin-top]="temaActual.musicSpacingSm"
+            [style.overflow]="'hidden'">
+            <div
+
+              [style.height]="'100%'"
+              [style.background]="temaActual.gradientPrimary"
+              [style.border-radius]="temaActual.musicRadiusPill"
+              [style.transition]="'width 0.3s ease'">
+            </div>
+          </div>
+        </ion-label>
+
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
+
+<!-- Footer flotante mejorado -->
+<ion-footer *ngIf="songs && songs.length > 0" class="ion-no-border">
+  <div
+    [style.background]="temaActual.cardBackground"
+    [style.backdrop-filter]="temaActual.musicBackdropBlurLg"
+    [style.border-top]="'1px solid ' + temaActual.musicAlpha10"
+    [style.padding]="temaActual.musicSpacingLg"
+    [style.box-shadow]="'0 -8px 24px rgba(0, 0, 0, 0.1)'"
+    class="footer-container">
+
+    <div
+      [style.display]="'flex'"
+      [style.justify-content]="'space-between'"
+      [style.align-items]="'center'"
+      [style.gap]="temaActual.musicSpacingMd">
+
+      <!-- Controles principales -->
+      <div [style.display]="'flex'" [style.gap]="temaActual.musicSpacingSm">
+        <ion-button
+          fill="solid"
+
+          [style.--background]="temaActual.gradientPrimary"
+          [style.--color]="temaActual.musicButtonPrimaryText"
+          [style.border-radius]="temaActual.musicRadiusPill"
+          [style.font-weight]="temaActual.musicFontWeightMedium"
+          [style.backdrop-filter]="temaActual.musicBackdropBlurSm"
+          [style.box-shadow]="temaActual.musicShadowMd">
+          <ion-icon name="play" slot="start"></ion-icon>
+          Reproducir todo
+        </ion-button>
+
+        <ion-button
+          fill="outline"
+
+          [style.--color]="temaActual.musicGreen"
+          [style.--border-color]="temaActual.musicGreen"
+          [style.border-radius]="temaActual.musicRadiusPill"
+          [style.backdrop-filter]="temaActual.musicBackdropBlurSm">
+          <ion-icon name="shuffle" slot="start"></ion-icon>
+          Aleatorio
+        </ion-button>
+      </div>
+
+    </div>
+  </div>
+</ion-footer>

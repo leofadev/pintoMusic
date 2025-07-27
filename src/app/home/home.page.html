@@ -1,37 +1,183 @@
 <ion-header>
   <ion-toolbar [style.--background]="temaActual.toolbarBg" [style.background]="temaActual.toolbarBg">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button [style.color]="temaActual.textColor"></ion-menu-button>
     </ion-buttons>
     <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--music-font-weight-bold)'" slot="start">Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<div class="ion-page" id="main-content" [style.background-color]="temaActual.contentBg">
-  <ion-header>
-    <ion-toolbar [style.--background]="temaActual.toolbarBg" [style.background]="temaActual.toolbarBg">
-      <ion-buttons slot="start">
-        <ion-menu-button [style.color]="temaActual.textColor"></ion-menu-button>
-      </ion-buttons>
+<ion-content [style.background-color]="temaActual.contentBg" fullscreen class="home-content">
+  <!-- Fondo decorativo -->
+  <div class="background-gradient" [style.background]="temaActual.background"></div>
+  <div class="background-shapes">
+    <div class="shape shape-1" [style.background]="temaActual.musicAlpha10"></div>
+    <div class="shape shape-2" [style.background]="temaActual.musicAlpha5"></div>
+    <div class="shape shape-3" [style.background]="temaActual.musicAlpha10"></div>
+  </div>
+  <div class="musical-notes">
+    <ng-container *ngFor="let note of notasMusicales; let i = index">
+      <div class="note"
+          [style.left]="getFixedPosition(i).left"
+          [style.top]="getFixedPosition(i).top"
+          [style.animation-delay]="(i * 1.3 % 20) + 's'"
+          [style.font-size]="(2.5 + (i % 3)) + 'rem'"
+          [style.color]="getNoteColor()">
+        {{ getNoteSymbol(i) }}
+      </div>
+    </ng-container>
+  </div>
 
-      <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--music-font-weight-bold)'">
-        Home
-      </ion-title>
+  <div class="particles-background">
+    <div class="particle particle-1" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-2" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-3" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-4" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-5" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-6" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-7" [style.background]="temaActual.musicAlpha40"></div>
+    <div class="particle particle-8" [style.background]="temaActual.musicAlpha40"></div>
+  </div>
 
-    </ion-toolbar>
-  </ion-header>
-
-  <!-- Aquí va tu ion-content con el swiper -->
-  <ion-content [style.background-color]="temaActual.contentBg">
-    <swiper-container pagination="true" loop="true" slides-per-view="1" autoplay="true" autoplay-delay="10000" [style.background-color]="temaActual.contentBg" [style.height]="'100%'">
-      <swiper-slide *ngFor="let genre of genres">
-        <div class="slide-content" [style.background-color]="temaActual.slideBackground" [style.color]="temaActual.textColor" [style.box-shadow]="temaActual.shadow">
-          <h2 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">{{ genre.title }}</h2>
-          <img [src]="genre.image" [alt]="genre.title">
-          <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">{{ genre.description }}</p>
+  <!-- Sección: Álbumes disponibles -->
+  <section class="albums-section">
+    <h2 class="section-title" [style.color]="temaActual.titleColor">Álbumes disponibles</h2>
+    <swiper-container
+      class="albums-swiper"
+      pagination="false"
+      loop="true"
+      slides-per-view="2"
+      space-between="16"
+      autoplay="true"
+      autoplay-delay="4000"
+      breakpoints='{
+        "480": {"slidesPerView": 2, "spaceBetween": 16},
+        "768": {"slidesPerView": 3, "spaceBetween": 20},
+        "1024": {"slidesPerView": 4, "spaceBetween": 24},
+        "1200": {"slidesPerView": 5, "spaceBetween": 28}
+      }'>
+      <swiper-slide *ngFor="let album of albums" class="album-slide" (click)="showSongs(album.id)">
+        <div class="card album-card"
+            [style.background-color]="temaActual.slideBackground"
+            [style.color]="temaActual.textColor"
+            [style.box-shadow]="temaActual.shadow">
+          <img [src]="album.image" alt="{{ album.name }}" />
+          <div class="card-info">
+            <h3 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">
+              {{ album.name }}
+            </h3>
+            <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">
+              {{ album.label }}
+            </p>
+          </div>
         </div>
       </swiper-slide>
     </swiper-container>
-  </ion-content>
-</div>
+  </section>
 
+  <!-- crear un section con los artistas del servidor y al darle click muesatre las canciones de ese artista -->
+  <section class="albums-section">
+    <h2 class="section-title" [style.color]="temaActual.titleColor">Artistas</h2>
+    <swiper-container
+      class="albums-swiper"
+      pagination="false"
+      loop="true"
+      slides-per-view="2"
+      space-between="16"
+      autoplay="true"
+      autoplay-delay="4000">
+
+      <swiper-slide *ngFor="let artist of artists" class="album-slide" (click)="showSongsByArtist(artist.id)">
+        <div class="card track-card"
+            [style.background-color]="'transparent'"
+            [style.color]="temaActual.textColor"
+            [style.box-shadow]="temaActual.shadow">
+
+          <img [src]="artist.image" alt="{{ artist.name }}" style="width: 100%; border-radius: var(--music-radius-lg); margin-bottom: 1rem;" />
+
+          <div class="card-info">
+            <h3 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">
+              {{ artist.name }}
+            </h3>
+
+            <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">
+              Popularidad: {{ artist.popularity }}
+            </p>
+
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </section>
+
+  <!-- Sección: Géneros disponibles -->
+  <section class="albums-section">
+    <h2 class="section-title" [style.color]="temaActual.titleColor">Explora por género</h2>
+    <swiper-container
+      class="albums-swiper"
+      pagination="false"
+      loop="true"
+      slides-per-view="2"
+      space-between="16"
+      autoplay="true"
+      autoplay-delay="4000"
+      breakpoints='{
+        "480": {"slidesPerView": 2, "spaceBetween": 16},
+        "768": {"slidesPerView": 3, "spaceBetween": 20},
+        "1024": {"slidesPerView": 4, "spaceBetween": 24},
+        "1200": {"slidesPerView": 5, "spaceBetween": 28}
+      }'>
+      <swiper-slide *ngFor="let genre of genres" class="album-slide">
+        <div class="card artist-card"
+            [style.background-color]="temaActual.slideBackground"
+            [style.color]="temaActual.textColor"
+            [style.box-shadow]="temaActual.shadow">
+          <img [src]="genre.image" alt="{{ genre.title }}" />
+          <div class="card-info">
+            <h3 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">
+              {{ genre.title }}
+            </h3>
+            <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">
+              {{ genre.description }}
+            </p>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </section>
+
+
+
+
+
+
+    <!-- Sección: Pistas destacadas -->
+  <!-- <section class="albums-section">
+    <h2 class="section-title" [style.color]="temaActual.titleColor">Escucha lo nuevo</h2>
+    <swiper-container
+      class="albums-swiper"
+      pagination="false"
+      loop="true"
+      slides-per-view="2"
+      space-between="16"
+      autoplay="true"
+      autoplay-delay="4000">
+      <swiper-slide *ngFor="let track of tracks" class="album-slide">
+        <div class="card track-card"
+            [style.background-color]="'transparent'"
+            [style.color]="temaActual.textColor"
+            [style.box-shadow]="temaActual.shadow">
+          <div class="card-info">
+            <h3 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">
+              {{ track.name }}
+            </h3>
+            <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">
+              Duración: {{ (track.duration_ms / 1000).toFixed(0) }} seg
+            </p>
+            <audio controls [src]="track.preview_url" style="width: 100%; margin-top: 0.5rem;"></audio>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </section> -->
+</ion-content>

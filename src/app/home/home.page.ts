@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonicModule, NavController } from '@ionic/angular';
+import { IonicModule, NavController, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService, Theme } from '../services/theme.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import { MusicService } from '../services/music.service';
+import { SongsModalPage } from '../songs-modal/songs-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -57,9 +59,16 @@ export class HomePage implements OnInit, OnDestroy {
     }
   ];
 
-  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router, private navCtrl: NavController,) {}
+
+  tracks: any;
+  albums: any;
+  artists: any;
+  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router, private navCtrl: NavController, private musicService: MusicService, private modalCtrl: ModalController) {}
 
   ngOnInit() {
+    this.loadTracks();
+    this.loadAlbums();
+    this.loadArtist();
     // Suscribirse a los cambios de tema
     this.themeSubscription = this.themeService.temaActual$.subscribe(tema => {
       this.temaActual = tema;
@@ -67,6 +76,59 @@ export class HomePage implements OnInit, OnDestroy {
 
     // Obtener el tema actual inmediatamente (en caso de que ya esté cargado)
     this.temaActual = this.themeService.temaActual;
+  }
+
+  public notasMusicales = new Array(10);
+  // Devuelve una posición fija para cada índice, flotando en la página
+  getFixedPosition(index: number) {
+    // Define posiciones fijas para cada género
+    const positions = [
+      { left: '15%', top: '20%' },
+      { left: '60%', top: '18%' },
+      { left: '25%', top: '55%' },
+      { left: '70%', top: '60%' },
+      { left: '40%', top: '35%' },
+      { left: '10%', top: '70%' },
+      { left: '80%', top: '40%' }
+    ];
+    // Si hay más géneros que posiciones, repetir posiciones
+    const pos = positions[index % positions.length];
+    return {
+      left: pos.left,
+      top: pos.top
+    };
+  }
+
+  // Devuelve la nota musical correspondiente al índice
+  getNoteSymbol(index: number): string {
+    // Alterna entre '♪' y '♫'
+    return index % 2 === 0 ? '♫' : '♪';
+  }
+
+  // Devuelve el color para la nota musical
+  getNoteColor(): string {
+    return this.temaActual?.musicAlpha5 || '#000';
+  }
+
+  loadTracks(){
+    this.musicService.getTracks().then(tracks => {
+      this.tracks = tracks;
+      console.log(this.tracks, "las canciones")
+    })
+  }
+
+  loadAlbums(){
+    this.musicService.getAlbums().then(albums => {
+      this.albums = albums;
+      console.log(this.albums, "los albums")
+    })
+  }
+
+    loadArtist(){
+    this.musicService.getArtists().then(artists => {
+      this.artists = artists;
+      console.log(this.artists, "los artistas")
+    })
   }
 
   ngOnDestroy() {
@@ -89,4 +151,35 @@ export class HomePage implements OnInit, OnDestroy {
     goToLogin() {
     this.navCtrl.navigateBack('/login');
   }
+
+  async showSongs(albumId: string){
+    console.log('album Id',albumId);
+    const songs = await this.musicService.getSongsByAlbum(albumId);
+    console.log('songs', songs);
+
+    const modal = await this.modalCtrl.create({
+      component: SongsModalPage,
+      componentProps:{
+        songs: songs
+      }
+    });
+    modal.present();
+  }
+
+    async showSongsByArtist(artistId: string){
+    console.log('album Id',artistId);
+    const songs = await this.musicService.getSongsByArtist(artistId);
+    const artists = await this.musicService.getSongsByArtist(artistId);
+    console.log('Artists Songs', songs);
+    console.log('Artists ', artists);
+
+    const modal = await this.modalCtrl.create({
+      component: SongsModalPage,
+      componentProps:{
+        songs: songs
+      }
+    });
+    modal.present();
+  }
+
 }

@@ -3,7 +3,9 @@
   <ion-header>
     <ion-toolbar [style.--background]="temaActual.toolbarBg" [style.background]="temaActual.toolbarBg">
       <ion-menu-toggle slot="end">
-        <ion-icon name="close-outline"></ion-icon>
+        <ion-icon name="close-outline" class="close-icon" [style.color]="temaActual.textColor" [style.font-size]="'1.8rem'" [style.cursor]="'pointer'">
+      </ion-icon>
+
       </ion-menu-toggle>
       <ion-title [style.color]="temaActual.textColor" [style.font-weight]="'var(--music-font-weight-bold)'">
         Menú
@@ -30,9 +32,10 @@
       [style.font-weight]="'var(--music-font-weight-medium)'"
       [style.font-size]="temaActual.musicTextBase"
       [style.background]="temaActual.hoverBackground"
+      lines="none"
       >
       <ion-label [style.color]="temaActual.textColor">Cambiar de tema</ion-label>
-      <ion-icon name="contrast" slot="start"></ion-icon>
+      <ion-icon name="contrast" slot="start" [style.color]="temaActual.textColor"></ion-icon>
       </ion-item>
 
       <ion-item
@@ -48,9 +51,10 @@
       [style.font-weight]="'var(--music-font-weight-medium)'"
       [style.font-size]="temaActual.musicTextBase"
       [style.background]="temaActual.hoverBackground"
+      lines="none"
       >
       <ion-label [style.color]="temaActual.textColor">Ir a iniciar sesión</ion-label>
-      <ion-icon name="log-in-outline" slot="start"></ion-icon>
+      <ion-icon name="log-in-outline" slot="start" [style.color]="temaActual.textColor"></ion-icon>
       </ion-item>
 
       <ion-item
@@ -65,9 +69,10 @@
       [style.font-weight]="'var(--music-font-weight-medium)'"
       [style.font-size]="temaActual.musicTextBase"
       [style.background]="temaActual.hoverBackground"
+      lines="none"
       >
       <ion-label [style.color]="temaActual.textColor">Ver intro</ion-label>
-      <ion-icon name="eye-outline" slot="start"></ion-icon>
+      <ion-icon  name="eye-outline" slot="start" [style.color]="temaActual.textColor"></ion-icon>
       </ion-item>
     </ion-list>
 
