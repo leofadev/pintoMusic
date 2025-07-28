@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonicModule, NavController, ModalController } from '@ionic/angular';
+import { IonicModule, NavController, ModalController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService, Theme } from '../services/theme.service';
@@ -8,6 +8,7 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { MusicService } from '../services/music.service';
 import { SongsModalPage } from '../songs-modal/songs-modal.page';
+import { FavoritesService, FavoriteTrack }from '../services/favorites.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,10 @@ export class HomePage implements OnInit, OnDestroy {
 
   temaActual!: Theme;
   private themeSubscription!: Subscription;
+  private favoritesSubscription!: Subscription;
+
+  userFavorites: FavoriteTrack[] = [];
+  isToggling: boolean = false;
 
   genres = [
     {
@@ -63,7 +68,11 @@ export class HomePage implements OnInit, OnDestroy {
   tracks: any;
   albums: any;
   artists: any;
-  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router, private navCtrl: NavController, private musicService: MusicService, private modalCtrl: ModalController) {}
+  song: any = {name: '', preview_url: '', duration_msL: '', playing: false};
+  songName: string | null = null;
+  currentSong: any = {};
+  newTime: any;
+  constructor(private themeService: ThemeService, private storageService: StorageService, private router: Router, private navCtrl: NavController, private musicService: MusicService, private modalCtrl: ModalController, private favoritesService: FavoritesService, private toastController: ToastController) {}
 
   ngOnInit() {
     this.loadTracks();
@@ -72,6 +81,12 @@ export class HomePage implements OnInit, OnDestroy {
     // Suscribirse a los cambios de tema
     this.themeSubscription = this.themeService.temaActual$.subscribe(tema => {
       this.temaActual = tema;
+    });
+
+    // Suscribirse a los cambios de favoritos
+    this.favoritesSubscription = this.favoritesService.favorites$.subscribe(favorites => {
+      this.userFavorites = favorites;
+      console.log('📚 Favoritos actualizados en componente:', favorites.length);
     });
 
     // Obtener el tema actual inmediatamente (en caso de que ya esté cargado)
@@ -98,6 +113,82 @@ export class HomePage implements OnInit, OnDestroy {
       top: pos.top
     };
   }
+
+  async onToggleFavorite(song: any) {
+    if (!song?.id) {
+      console.warn('⚠️ Canción sin ID válido');
+      return;
+    }
+
+    this.isToggling = true; // Mostrar loading
+
+    try {
+      const operation = await this.favoritesService.toggleTrackFavorite(song);
+
+      operation.subscribe({
+        next: (result) => {
+          this.isToggling = false;
+          if (result.success) {
+            console.log('✅ Favorito actualizado:', result.message);
+            // this.presentToast(result.message);
+          } else {
+            console.error('❌ Error:', result.message);
+            // this.presentToast(result.message, 'danger');
+          }
+        },
+        error: (error) => {
+          this.isToggling = false;
+          console.error('❌ Error en la operación:', error);
+          // this.presentToast('Error al actualizar favorito', 'danger');
+        }
+      });
+    } catch (error) {
+      this.isToggling = false;
+      console.error('❌ Error:', error);
+    }
+  }
+
+  isFavorite(trackId: number): boolean {
+    if (!trackId) return false;
+    return this.userFavorites.some(fav => fav.track_id === trackId);
+  }
+
+  getIconName(trackId?: number): string {
+    if (!trackId) return 'heart-outline';
+    const isFav = this.isFavorite(trackId);
+    return isFav ? 'heart' : 'heart-outline';
+  }
+
+  getIconColor(trackId?: number): string {
+    if (!trackId) return this.temaActual.musicTextMuted;
+
+    const isFav = this.isFavorite(trackId);
+    return isFav ? this.temaActual.musicGreen : this.temaActual.musicGreen;
+  }
+
+  async refreshFavorites() {
+    await this.favoritesService.refreshFavorites();
+  }
+
+  getFavoritesCount(): number {
+    return this.userFavorites.length;
+  }
+
+  async checkIfFavorite(trackId: number): Promise<boolean> {
+    return await this.favoritesService.isTrackInFavorites(trackId);
+  }
+
+  // Método para mostrar toast notifications
+
+  // async presentToast(message: string, color: string = 'success') {
+  //   const toast = await this.toastController.create({
+  //     message: message,
+  //     duration: 2000,
+  //     color: color,
+  //     position: 'bottom'
+  //   });
+  //   toast.present();
+  // }
 
   // Devuelve la nota musical correspondiente al índice
   getNoteSymbol(index: number): string {
@@ -136,6 +227,10 @@ export class HomePage implements OnInit, OnDestroy {
     if (this.themeSubscription) {
       this.themeSubscription.unsubscribe();
     }
+
+    if (this.favoritesSubscription) {
+      this.favoritesSubscription.unsubscribe();
+    }
   }
 
   // Método simplificado para cambiar tema
@@ -152,21 +247,32 @@ export class HomePage implements OnInit, OnDestroy {
     this.navCtrl.navigateBack('/login');
   }
 
-  async showSongs(albumId: string){
-    console.log('album Id',albumId);
+  async showSongs(albumId: string) {
+    console.log('album Id', albumId);
+
     const songs = await this.musicService.getSongsByAlbum(albumId);
     console.log('songs', songs);
 
+    const firstSongName = songs.length > 0 ? songs[0].name : 'Sin título';
+
     const modal = await this.modalCtrl.create({
       component: SongsModalPage,
-      componentProps:{
-        songs: songs
+      componentProps: {
+        songs: songs,
+        songName: firstSongName
       }
     });
+      modal.onDidDismiss().then((result) =>{
+      if (result.data) {
+        console.log('cancion recibida', result.data);
+        this.song = result.data;
+      }
+    })
     modal.present();
   }
 
-    async showSongsByArtist(artistId: string){
+
+  async showSongsByArtist(artistId: string){
     console.log('album Id',artistId);
     const songs = await this.musicService.getSongsByArtist(artistId);
     const artists = await this.musicService.getSongsByArtist(artistId);
@@ -179,7 +285,41 @@ export class HomePage implements OnInit, OnDestroy {
         songs: songs
       }
     });
+
+    modal.onDidDismiss().then((result) =>{
+      if (result.data) {
+        console.log('cancion recibida', result.data);
+        this.song = result.data;
+      }
+    })
     modal.present();
   }
 
+  play(){
+    this.currentSong = new Audio(this.song.preview_url);
+    this.currentSong.play();
+    this.currentSong.addEventListener('timeupdate', ()=>{
+      this.newTime = this.currentSong.currentTime / this.currentSong.duration;
+    })
+    this.song.playing = true;
+  }
+
+  pause(){
+    this.currentSong.pause();
+    this.song.playing = false;
+  }
+
+  formatTime(seconds: number){
+    if (!seconds || isNaN(seconds)) return '0:00';
+    const minutes = Math.floor(seconds/60);
+    const remaIningSeconds = Math.floor(seconds % 60);
+    return `${minutes}: ${remaIningSeconds.toString().padStart(2, '0')}`
+  }
+
+  getRemainingSeconds(){
+    if (!this.currentSong?.duration || !this.currentSong?.currentTime) {
+      return 0;
+    }
+    return this.currentSong.duration - this.currentSong.currentTime;
+  }
 }

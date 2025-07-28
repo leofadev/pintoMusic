@@ -127,6 +127,7 @@
         class="playing-indicator">
       </div>
       <ion-item
+        (click)="selectSong(song)"
         [style.--background]="'transparent'"
         [style.--color]="temaActual.textColor"
         [style.padding]="temaActual.musicSpacingMd"
@@ -198,7 +199,7 @@
     [style.background]="temaActual.cardBackground"
     [style.backdrop-filter]="temaActual.musicBackdropBlurLg"
     [style.border-top]="'1px solid ' + temaActual.musicAlpha10"
-    [style.padding]="temaActual.musicSpacingLg"
+    [style.padding]="temaActual.musicSpacingMd"
     [style.box-shadow]="'0 -8px 24px rgba(0, 0, 0, 0.1)'"
     class="footer-container">
 
@@ -206,33 +207,18 @@
       [style.display]="'flex'"
       [style.justify-content]="'space-between'"
       [style.align-items]="'center'"
-      [style.gap]="temaActual.musicSpacingMd">
+      [style.gap]="temaActual.musicSpacingSm">
 
       <!-- Controles principales -->
       <div [style.display]="'flex'" [style.gap]="temaActual.musicSpacingSm">
-        <ion-button
-          fill="solid"
-
-          [style.--background]="temaActual.gradientPrimary"
-          [style.--color]="temaActual.musicButtonPrimaryText"
-          [style.border-radius]="temaActual.musicRadiusPill"
-          [style.font-weight]="temaActual.musicFontWeightMedium"
-          [style.backdrop-filter]="temaActual.musicBackdropBlurSm"
-          [style.box-shadow]="temaActual.musicShadowMd">
-          <ion-icon name="play" slot="start"></ion-icon>
-          Reproducir todo
-        </ion-button>
-
-        <ion-button
-          fill="outline"
-
-          [style.--color]="temaActual.musicGreen"
-          [style.--border-color]="temaActual.musicGreen"
-          [style.border-radius]="temaActual.musicRadiusPill"
-          [style.backdrop-filter]="temaActual.musicBackdropBlurSm">
-          <ion-icon name="shuffle" slot="start"></ion-icon>
-          Aleatorio
-        </ion-button>
+        <ion-text [style.background]="temaActual.textGradient"
+            [style.-webkit-background-clip]="'text'"
+            [style.background-clip]="'text'"
+            [style.-webkit-text-fill-color]="'transparent'"
+            [style.font-weight]="temaActual.musicFontWeightBold"
+            [style.font-size]="temaActual.musicText2xl">
+          <h3>Elige una canción para comenzar</h3>
+        </ion-text>
       </div>
 
     </div>

@@ -74,6 +74,28 @@
       </div>
     </div>
 
+    <ion-item class="register-input-item">
+      <ion-input
+        label="Confirmar Contraseña"
+        labelPlacement="stacked"
+        placeholder="Confirmar contraseña"
+        formControlName="password_confirmation"
+        type="password">
+      </ion-input>
+    </ion-item>
+    <div class="validation-messages">
+      <div *ngFor="let validation of validation_messages.password_confirmation">
+        <ion-text color="danger"
+          *ngIf="registerForm.get('password_confirmation')?.hasError(validation.type) && registerForm.get('password_confirmation')?.dirty">
+          {{ validation.message }}
+        </ion-text>
+      </div>
+      
+      <ion-text color="danger" *ngIf="hasPasswordMismatch() && registerForm.get('password_confirmation')?.dirty">
+      Las contraseñas no coinciden
+    </ion-text>
+    </div>
+
     <ion-button expand="full" shape="round" color="success" type="submit" [disabled]="! registerForm.valid" class="register-button">
       Crear Cuenta
     </ion-button>

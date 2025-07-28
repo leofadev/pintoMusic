@@ -146,38 +146,106 @@
     </swiper-container>
   </section>
 
-
-
-
-
-
-    <!-- Sección: Pistas destacadas -->
-  <!-- <section class="albums-section">
-    <h2 class="section-title" [style.color]="temaActual.titleColor">Escucha lo nuevo</h2>
-    <swiper-container
-      class="albums-swiper"
-      pagination="false"
-      loop="true"
-      slides-per-view="2"
-      space-between="16"
-      autoplay="true"
-      autoplay-delay="4000">
-      <swiper-slide *ngFor="let track of tracks" class="album-slide">
-        <div class="card track-card"
-            [style.background-color]="'transparent'"
-            [style.color]="temaActual.textColor"
-            [style.box-shadow]="temaActual.shadow">
-          <div class="card-info">
-            <h3 [style.color]="temaActual.titleColor" [style.font-weight]="'var(--music-font-weight-bold)'">
-              {{ track.name }}
-            </h3>
-            <p [style.color]="temaActual.descriptionColor" [style.font-weight]="'var(--music-font-weight-normal)'">
-              Duración: {{ (track.duration_ms / 1000).toFixed(0) }} seg
-            </p>
-            <audio controls [src]="track.preview_url" style="width: 100%; margin-top: 0.5rem;"></audio>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper-container>
-  </section> -->
 </ion-content>
+
+<ion-footer
+  slot="start"
+  [style.--background]="temaActual.toolbarBg"
+  [style.background]="temaActual.toolbarBg"
+  [style.border-top]="'1px solid ' + temaActual.borderColor"
+  [style.padding]="temaActual.musicSpacingMd"
+  [style.box-shadow]="temaActual.shadow"
+  [style.backdrop-filter]="temaActual.musicBackdropBlurSm">
+
+  <ion-grid [style.margin]="'0'" [style.padding]="'0'">
+    <ion-row [style.margin-bottom]="temaActual.musicSpacingSm">
+      <ion-col
+        class="ion-text-start"
+        [style.color]="temaActual.musicTextMuted"
+        [style.font-size]="temaActual.musicTextXs"
+        [style.font-weight]="temaActual.musicFontWeightMedium">
+        {{formatTime(currentSong?.currentTime) || '0:00'}}
+      </ion-col>
+      <ion-col
+        class="ion-text-end"
+        [style.color]="temaActual.musicTextMuted"
+        [style.font-size]="temaActual.musicTextXs"
+        [style.font-weight]="temaActual.musicFontWeightMedium">
+        {{formatTime(getRemainingSeconds()) || '0:00'}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-progress-bar
+    [value]="newTime || 0"
+    [style.--background]="temaActual.currentBorderSubtle"
+    [style.--progress-background]="temaActual.musicGreen"
+    [style.height]="'4px'"
+    [style.border-radius]="temaActual.musicRadiusSm"
+    [style.margin-bottom]="temaActual.musicSpacingMd">
+  </ion-progress-bar>
+
+  <ion-grid [style.margin]="'0'" [style.padding]="'0'">
+    <ion-row [style.align-items]="'center'">
+      <ion-col size="1">
+        <ion-icon
+          [name]="getIconName(song?.id)"
+          [style.color]="getIconColor(song?.id)"
+          [style.font-size]="temaActual.musicTextLg"
+          [style.transition]="temaActual.musicTransitionNormal"
+          [style.cursor]="song?.id ? 'pointer' : 'default'"
+          [style.--hover-color]="temaActual.musicGreen"
+          [style.opacity]="isToggling ? '0.6' : '1'"
+          (click)="song?.id && !isToggling ? onToggleFavorite(song) : null">
+        </ion-icon>
+
+        <!-- Opcional: Mostrar loading durante la operación -->
+        <ion-spinner
+          *ngIf="isToggling"
+          name="crescent"
+          [style.width.px]="16"
+          [style.height.px]="16"
+          [style.position]="'absolute'">
+        </ion-spinner>
+      </ion-col>
+      <ion-col size="10" [style.text-align]="'center'">
+        <ion-text
+          [style.color]="song?.name ? temaActual.textColor : temaActual.musicTextMuted"
+          [style.font-size]="temaActual.musicTextSm"
+          [style.font-weight]="temaActual.musicFontWeightMedium"
+          [style.transition]="temaActual.musicTransitionNormal"
+          [style.text-overflow]="'ellipsis'"
+          [style.overflow]="'hidden'"
+          [style.white-space]="'nowrap'">
+          {{song?.name || 'Selecciona una canción'}}
+        </ion-text>
+      </ion-col>
+      <ion-col size="1" [style.text-align]="'center'">
+        <ion-icon
+          name="play"
+          *ngIf="!song?.playing"
+          (click)="play()"
+          [style.color]="temaActual.musicGreen"
+          [style.font-size]="temaActual.musicTextXl"
+          [style.transition]="temaActual.musicTransitionNormal"
+          [style.cursor]="'pointer'"
+          [style.padding]="temaActual.musicSpacingXs"
+          [style.border-radius]="temaActual.musicRadiusFull"
+          [style.--hover-background]="temaActual.musicAlpha10">
+        </ion-icon>
+        <ion-icon
+          name="pause"
+          *ngIf="song?.playing"
+          (click)="pause()"
+          [style.color]="temaActual.musicGreen"
+          [style.font-size]="temaActual.musicTextXl"
+          [style.transition]="temaActual.musicTransitionNormal"
+          [style.cursor]="'pointer'"
+          [style.padding]="temaActual.musicSpacingXs"
+          [style.border-radius]="temaActual.musicRadiusFull"
+          [style.--hover-background]="temaActual.musicAlpha10">
+        </ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

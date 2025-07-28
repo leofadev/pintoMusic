@@ -17,6 +17,7 @@ export class SongsModalPage implements OnInit {
 
   songs: any;
   artists: any;
+  songName: string | null = null;
   temaActual!: Theme;
   private themeSubscription!: Subscription;
 
@@ -56,6 +57,9 @@ export class SongsModalPage implements OnInit {
 
     console.log('Resultado final - Songs:', this.songs, 'Artists:', this.artists);
 
+    this.songName = receivedData['songName'] ?? null;
+    console.log('Nombre recibido de la canción:', this.songName);
+
   }
 
   ngOnDestroy() {
@@ -80,4 +84,8 @@ export class SongsModalPage implements OnInit {
     return `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
   }
 
+  async selectSong(song: any){
+    console.log('cancion seleccionada', song);
+    await this.modalCtrl.dismiss(song);
+  }
 }

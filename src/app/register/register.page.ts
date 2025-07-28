@@ -37,6 +37,11 @@ export class RegisterPage implements OnInit {
     password: [
       { type: 'required', message: 'La contraseña es obligatoria' },
       { type: 'minlength', message: 'La contraseña debe tener al menos 6 caracteres' }
+    ],
+    password_confirmation: [
+      { type: 'required', message: 'Debe confirmar la contraseña' },
+      { type: 'minlength', message: 'La confirmación debe tener al menos 6 caracteres' },
+      { type: 'mismatch', message: 'Las contraseñas no coinciden' }
     ]
   };
 
@@ -81,7 +86,17 @@ export class RegisterPage implements OnInit {
           Validators.required,
           Validators.minLength(6)
         ])
+      ),
+      password_confirmation: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6)
+        ])
       )
+    },
+    {
+      validator: this.passwordsMatchValidator
     });
   }
 
@@ -181,4 +196,17 @@ export class RegisterPage implements OnInit {
     const field = this.registerForm.get(fieldName);
     return field ? field.invalid && field.touched : false;
   }
+
+  passwordsMatchValidator(form: FormGroup) {
+  const password = form.get('password')?.value;
+  const confirmPassword = form.get('password_confirmation')?.value;
+  return password === confirmPassword ? null : { mismatch: true };
+}
+
+hasPasswordMismatch(): boolean {
+  const password = this.registerForm.get('password')?.value;
+  const confirm = this.registerForm.get('password_confirmation')?.value;
+  return password && confirm && password !== confirm;
+}
+
 }

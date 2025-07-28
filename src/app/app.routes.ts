@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { introGuard } from './guards/intro.guard';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard} from './guards/auth.guard';
 
 /* Agregar el guard de login  */
 export const routes: Routes = [
@@ -23,14 +23,15 @@ export const routes: Routes = [
   },
   {
     path: 'menu',
-    loadComponent: () => import('./menu/menu.page').then(m => m.MenuPage), canActivate: [introGuard, authGuard],
+    loadComponent: () => import('./menu/menu.page').then(m => m.MenuPage), canActivate: [introGuard, AuthGuard],
     children: [
       {
         path: 'home',
         loadComponent: () => import('./home/home.page').then(m => m.HomePage)
       },
     ]
-  },  {
+  },
+  {
     path: 'songs-modal',
     loadComponent: () => import('./songs-modal/songs-modal.page').then( m => m.SongsModalPage)
   },
