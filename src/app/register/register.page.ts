@@ -124,7 +124,6 @@ export class RegisterPage implements OnInit {
     await loading.present();
 
     try {
-      console.log('Datos de registro:', credentials);
       const result = await this.RegisterService.registerUser(credentials);
 
       await loading.dismiss();
@@ -144,7 +143,6 @@ export class RegisterPage implements OnInit {
     } catch (error) {
       await loading.dismiss();
       this.error_message = error as string;
-      console.error('Error en registro:', error);
 
       // Mostrar toast de error
       await this.showToast(this.error_message, 'danger');
@@ -198,15 +196,15 @@ export class RegisterPage implements OnInit {
   }
 
   passwordsMatchValidator(form: FormGroup) {
-  const password = form.get('password')?.value;
-  const confirmPassword = form.get('password_confirmation')?.value;
-  return password === confirmPassword ? null : { mismatch: true };
-}
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('password_confirmation')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
+  }
 
-hasPasswordMismatch(): boolean {
-  const password = this.registerForm.get('password')?.value;
-  const confirm = this.registerForm.get('password_confirmation')?.value;
-  return password && confirm && password !== confirm;
-}
+  hasPasswordMismatch(): boolean {
+    const password = this.registerForm.get('password')?.value;
+    const confirm = this.registerForm.get('password_confirmation')?.value;
+    return password && confirm && password !== confirm;
+  }
 
 }

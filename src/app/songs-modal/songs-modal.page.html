@@ -1,3 +1,4 @@
+<!-- Header del modal con información del artista -->
 <ion-header class="ion-no-border">
   <ion-toolbar
     [style.--background]="temaActual.cardBackground"
@@ -8,8 +9,10 @@
     [style.padding]="'12px'">
 
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-      <!-- Si existe el artista -->
+
+      <!-- Sección del artista - se muestra si existe información del artista -->
       <div *ngIf="artists; else tituloPorDefecto" style="display: flex; align-items: center; gap: 16px;">
+        <!-- Imagen del artista -->
         <img [src]="artists.image"
             [alt]="artists.name"
             [style.width]="'56px'"
@@ -18,7 +21,9 @@
             [style.object-fit]="'cover'"
             [style.box-shadow]="temaActual.musicShadowMd" />
 
+        <!-- Información del artista -->
         <div>
+          <!-- Nombre del artista con gradiente -->
           <h2
             [style.background]="temaActual.textGradient"
             [style.-webkit-background-clip]="'text'"
@@ -30,6 +35,7 @@
             {{ artists.name }}
           </h2>
 
+          <!-- Géneros del artista -->
           <p
             [style.color]="temaActual.descriptionColor"
             [style.font-size]="temaActual.musicTextSm"
@@ -37,6 +43,7 @@
             Géneros: {{ artists.genres.join(', ') }}
           </p>
 
+          <!-- Popularidad del artista -->
           <p
             [style.color]="temaActual.descriptionColor"
             [style.font-size]="temaActual.musicTextSm"
@@ -46,7 +53,7 @@
         </div>
       </div>
 
-      <!-- Plantilla alternativa si no hay artista -->
+      <!-- Título por defecto cuando no hay información del artista -->
       <ng-template #tituloPorDefecto>
         <ion-title
             [style.background]="temaActual.textGradient"
@@ -60,7 +67,7 @@
         </ion-title>
       </ng-template>
 
-      <!-- Botón de cerrar -->
+      <!-- Botón para cerrar el modal -->
       <ion-buttons>
         <ion-button
           fill="clear"
@@ -80,12 +87,14 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenido principal del modal -->
 <ion-content
   [style.background]="temaActual.background"
   [style.--background]="temaActual.background"
   [style.overflow-x]="'hidden'"
   class="ion-padding-horizontal">
-  <!-- Estadísticas del playlist -->
+
+  <!-- Tarjeta de estadísticas (actualmente vacía) -->
   <div
     [style.background]="temaActual.cardBackground"
     [style.border-radius]="temaActual.musicRadiusXl"
@@ -95,13 +104,15 @@
     [style.border]="'1px solid ' + temaActual.musicAlpha10"
     [style.backdrop-filter]="temaActual.musicBackdropBlurMd"
     class="stats-card">
-
+    <!-- Aquí se pueden agregar estadísticas del playlist -->
   </div>
-  <!-- Lista de canciones mejorada -->
+
+  <!-- Lista de canciones -->
   <ion-list
     [style.background]="'transparent'"
     [style.padding]="'0'">
 
+    <!-- Cada canción se renderiza como una tarjeta -->
     <div
       *ngFor="let song of songs; index as i; "
       [style.background]="temaActual.cardBackground"
@@ -115,7 +126,7 @@
       [style.position]="'relative'"
       class="song-card">
 
-
+      <!-- Indicador lateral de canción (barra de color) -->
       <div
         [style.position]="'absolute'"
         [style.top]="'0'"
@@ -126,6 +137,8 @@
         [style.z-index]="'2'"
         class="playing-indicator">
       </div>
+
+      <!-- Item clickeable de la canción -->
       <ion-item
         (click)="selectSong(song)"
         [style.--background]="'transparent'"
@@ -134,8 +147,9 @@
         lines="none"
         button>
 
-        <!-- Información de la canción -->
+        <!-- Contenido de información de la canción -->
         <ion-label [style.overflow]="'hidden'">
+          <!-- Nombre de la canción -->
           <h2
             [style.color]="temaActual.titleColor"
             [style.font-weight]="temaActual.musicFontWeightSemibold"
@@ -148,7 +162,9 @@
             {{ song.name }}
           </h2>
 
+          <!-- Información adicional: artista y duración -->
           <div [style.display]="'flex'" [style.align-items]="'center'" [style.gap]="temaActual.musicSpacingSm">
+            <!-- Nombre del artista -->
             <p
               [style.color]="temaActual.descriptionColor"
               [style.font-size]="temaActual.musicTextSm"
@@ -157,6 +173,7 @@
               {{ song.artist || 'Artista desconocido' }}
             </p>
 
+            <!-- Duración de la canción -->
             <span
               *ngIf="song.duration_ms"
               [style.color]="temaActual.musicTextMuted"
@@ -169,9 +186,8 @@
             </span>
           </div>
 
-          <!-- Barra de progreso para canción actual -->
+          <!-- Barra de progreso decorativa -->
           <div
-
             [style.width]="'100%'"
             [style.height]="'3px'"
             [style.background]="temaActual.musicAlpha10"
@@ -179,7 +195,6 @@
             [style.margin-top]="temaActual.musicSpacingSm"
             [style.overflow]="'hidden'">
             <div
-
               [style.height]="'100%'"
               [style.background]="temaActual.gradientPrimary"
               [style.border-radius]="temaActual.musicRadiusPill"
@@ -193,7 +208,7 @@
   </ion-list>
 </ion-content>
 
-<!-- Footer flotante mejorado -->
+<!-- Footer con mensaje instructivo -->
 <ion-footer *ngIf="songs && songs.length > 0" class="ion-no-border">
   <div
     [style.background]="temaActual.cardBackground"
@@ -209,7 +224,7 @@
       [style.align-items]="'center'"
       [style.gap]="temaActual.musicSpacingSm">
 
-      <!-- Controles principales -->
+      <!-- Mensaje instructivo para el usuario -->
       <div [style.display]="'flex'" [style.gap]="temaActual.musicSpacingSm">
         <ion-text [style.background]="temaActual.textGradient"
             [style.-webkit-background-clip]="'text'"

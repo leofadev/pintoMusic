@@ -33,7 +33,6 @@ export class AuthService {
         }
 
       } catch (error: any) {
-        console.error('Error al conectar con la API:', error);
         const errorMsg = error?.error?.msg || 'Error en el servidor';
         reject(errorMsg);
       }

@@ -37,10 +37,7 @@ export class FavoritesService {
     });
   }
 
-  /**
-   * SERVICIO 1: Validar si una canción está en favoritos
-   * Basado en GET /user_favorites/:user_id
-   */
+  /* Validar si una canción está en favoritos */
   async isTrackInFavorites(trackId: number): Promise<boolean> {
     try {
       const userId = await this.getCurrentUserId();
@@ -56,15 +53,11 @@ export class FavoritesService {
         });
       });
     } catch (error) {
-      console.error('Error validando favorito:', error);
       return false;
     }
   }
 
-  /**
-   * SERVICIO 2: Agregar una canción a favoritos
-   * Basado en POST /favorite_tracks (asumiendo estructura Rails estándar)
-   */
+  /* Agregar una canción a favoritos */
   async addTrackToFavorites(song: any): Promise<Observable<{success: boolean, message: string, data?: any}>> {
     try {
       const userId = await this.getCurrentUserId();
@@ -105,7 +98,6 @@ export class FavoritesService {
             preview_url: song.preview_url
           };
           this.favoritesSubject.next([...currentFavorites, newFavorite]);
-          console.log('✅ Canción agregada a favoritos:', song.name);
         }),
         map(response => ({
           success: true,
@@ -113,21 +105,15 @@ export class FavoritesService {
           data: response
         })),
         catchError(error => {
-          console.error('❌ Error agregando a favoritos:', error);
           return of({success: false, message: 'Error al agregar a favoritos'});
         })
       );
     } catch (error) {
-      console.error('Error obteniendo userId para agregar favorito:', error);
       return of({success: false, message: 'Usuario no autenticado'});
     }
   }
 
-  /**
-   * SERVICIO 3: Eliminar una canción de favoritos
-   * NOTA: La API de Postman no incluye DELETE, necesitarás implementarlo
-   * Por ahora simularemos con eliminación local + llamada ficticia
-   */
+  /* Eliminar una canción de favoritos */
   async removeTrackFromFavorites(trackId: number): Promise<Observable<{success: boolean, message: string}>> {
     try {
       const userId = await this.getCurrentUserId();
@@ -143,17 +129,12 @@ export class FavoritesService {
         return of({success: false, message: 'La canción no está en favoritos'});
       }
 
-      // TODO: Implementar endpoint DELETE en el backend
-      // Por ahora, solo eliminación local
       const updatedFavorites = currentFavorites.filter(fav => fav.track_id !== trackId);
       this.favoritesSubject.next(updatedFavorites);
-
-      console.log('🗑️ Canción eliminada de favoritos (local):', favoriteToRemove.name);
 
       return of({success: true, message: 'Canción eliminada de favoritos correctamente'});
 
     } catch (error) {
-      console.error('Error eliminando favorito:', error);
       return of({success: false, message: 'Error interno'});
     }
   }
@@ -169,10 +150,7 @@ export class FavoritesService {
   }
 
 
-  /**
-   * Carga todos los favoritos del usuario actual
-   * GET /user_favorites/:user_id
-   */
+  /* Carga todos los favoritos del usuario actual GET /user_favorites/:user_id */
   private async loadUserFavorites(): Promise<void> {
     try {
       const userId = await this.getCurrentUserId();
@@ -181,83 +159,62 @@ export class FavoritesService {
       this.getUserFavorites(userId).subscribe({
         next: (favorites) => {
           this.favoritesSubject.next(favorites);
-          console.log('📚 Favoritos cargados:', favorites.length, 'canciones');
         },
         error: (error) => {
-          console.error('❌ Error cargando favoritos:', error);
           this.favoritesSubject.next([]);
         }
       });
     } catch (error) {
-      console.error('❌ Error obteniendo userId:', error);
       this.favoritesSubject.next([]);
     }
   }
 
-  /**
-   * Obtiene todos los favoritos de un usuario
-   * GET /user_favorites/:user_id
-   */
+  /* Obtiene todos los favoritos de un usuario GET /user_favorites/:user_id */
   getUserFavorites(userId: number): Observable<FavoriteTrack[]> {
     return this.http.get<FavoriteTrack[]>(`${this.apiUrl}/user_favorites/${userId}`, {
       headers: this.getHeaders()
     }).pipe(
       catchError(error => {
-        console.error('❌ Error obteniendo favoritos del usuario:', error);
         return of([]);
       })
     );
   }
 
-  /**
-   * Obtiene todos los favoritos (endpoint general)
-   * GET /favorite_tracks
-   */
+  /* Obtiene todos los favoritos (endpoint general) GET /favorite_tracks */
   getAllFavorites(): Observable<FavoriteTrack[]> {
     return this.http.get<FavoriteTrack[]>(`${this.apiUrl}/favorite_tracks`, {
       headers: this.getHeaders()
     }).pipe(
       catchError(error => {
-        console.error('❌ Error obteniendo todos los favoritos:', error);
         return of([]);
       })
     );
   }
 
-  /**
-   * Verifica si una canción está en favoritos (método síncrono para UI)
-   */
+  /* Verifica si una canción está en favoritos (método síncrono para UI) */
   isSongFavorite(trackId: number): boolean {
     return this.favoritesSubject.value.some(fav => fav.track_id === trackId);
   }
 
-  /**
-   * Obtiene la lista actual de favoritos
-   */
+  /* Obtiene la lista actual de favoritos */
   getCurrentFavorites(): FavoriteTrack[] {
     return this.favoritesSubject.value;
   }
 
-  /**
-   * Refresca la lista de favoritos
-   */
+  /* Refresca la lista de favoritos */
   async refreshFavorites(): Promise<void> {
     await this.loadUserFavorites();
   }
 
-  /**
-   * Obtiene el ID del usuario actual
-   */
+  /* Obtiene el ID del usuario actual */
   private async getCurrentUserId(): Promise<number | null> {
     try {
       const currentUser = await this.storageService.get('currentUser');
       if (!currentUser || !currentUser.id) {
-        console.warn('⚠️ Usuario no autenticado o sin ID');
         return null;
       }
       return currentUser.id;
     } catch (error) {
-      console.error('❌ Error obteniendo usuario actual:', error);
       return null;
     }
   }

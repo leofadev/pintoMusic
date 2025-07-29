@@ -20,10 +20,10 @@ export class RegisterService {
 
       const cleanCredentials = {
         name: credentials.name.trim(),
-        last_name: credentials.lastName.trim(), // 👈 debe ser last_name
+        last_name: credentials.lastName.trim(),
         email: credentials.email.toLowerCase().trim(),
         password: credentials.password,
-        password_confirmation: credentials.password // 👈 agregar esto también
+        password_confirmation: credentials.password 
       };
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,13 +52,12 @@ export class RegisterService {
         throw 'El apellido debe tener al menos 3 caracteres';
       }
 
-      // ✅ Enviar al backend con estructura correcta
+      // Enviar al backend con estructura correcta
       const payload = { user: cleanCredentials };
 
       await lastValueFrom(this.http.post(`${this.API_URL}/signup`, payload));
       return 'Usuario registrado exitosamente';
     } catch (error: any) {
-      console.error('Error de API:', error);
       const msg = typeof error === 'string' ? error : error?.error?.msg || 'Error al registrar el usuario.';
       throw msg;
     }

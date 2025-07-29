@@ -51,7 +51,6 @@ export class LoginPage implements OnInit {
   }
 
   loginUser(credentials: any){
-    console.log(credentials);
     this.AuthService.loginUser(credentials).then(async user => {
       this.error_message = '';
       await this.showToast(`Bienvenido ${user.name}`, 'success');

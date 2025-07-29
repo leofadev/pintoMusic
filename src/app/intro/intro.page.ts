@@ -200,8 +200,6 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
 
     if (carta.id === 4) {
       this.goBack()
-    } else {
-      console.log(`Card ${carta.buttonText} (id ${carta.id}) pressed — no redirection.`)
     }
   }
 

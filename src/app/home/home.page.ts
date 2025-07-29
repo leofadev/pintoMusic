@@ -86,7 +86,6 @@ export class HomePage implements OnInit, OnDestroy {
     // Suscribirse a los cambios de favoritos
     this.favoritesSubscription = this.favoritesService.favorites$.subscribe(favorites => {
       this.userFavorites = favorites;
-      console.log('📚 Favoritos actualizados en componente:', favorites.length);
     });
 
     // Obtener el tema actual inmediatamente (en caso de que ya esté cargado)
@@ -116,7 +115,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   async onToggleFavorite(song: any) {
     if (!song?.id) {
-      console.warn('⚠️ Canción sin ID válido');
       return;
     }
 
@@ -129,22 +127,18 @@ export class HomePage implements OnInit, OnDestroy {
         next: (result) => {
           this.isToggling = false;
           if (result.success) {
-            console.log('✅ Favorito actualizado:', result.message);
-            // this.presentToast(result.message);
+            this.presentToast(result.message);
           } else {
-            console.error('❌ Error:', result.message);
-            // this.presentToast(result.message, 'danger');
+            this.presentToast(result.message, 'danger');
           }
         },
         error: (error) => {
           this.isToggling = false;
-          console.error('❌ Error en la operación:', error);
-          // this.presentToast('Error al actualizar favorito', 'danger');
+          this.presentToast('Error al actualizar favorito', 'danger');
         }
       });
     } catch (error) {
       this.isToggling = false;
-      console.error('❌ Error:', error);
     }
   }
 
@@ -180,15 +174,15 @@ export class HomePage implements OnInit, OnDestroy {
 
   // Método para mostrar toast notifications
 
-  // async presentToast(message: string, color: string = 'success') {
-  //   const toast = await this.toastController.create({
-  //     message: message,
-  //     duration: 2000,
-  //     color: color,
-  //     position: 'bottom'
-  //   });
-  //   toast.present();
-  // }
+  async presentToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'bottom'
+    });
+    toast.present();
+  }
 
   // Devuelve la nota musical correspondiente al índice
   getNoteSymbol(index: number): string {
@@ -204,21 +198,18 @@ export class HomePage implements OnInit, OnDestroy {
   loadTracks(){
     this.musicService.getTracks().then(tracks => {
       this.tracks = tracks;
-      console.log(this.tracks, "las canciones")
     })
   }
 
   loadAlbums(){
     this.musicService.getAlbums().then(albums => {
       this.albums = albums;
-      console.log(this.albums, "los albums")
     })
   }
 
     loadArtist(){
     this.musicService.getArtists().then(artists => {
       this.artists = artists;
-      console.log(this.artists, "los artistas")
     })
   }
 
@@ -248,13 +239,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   async showSongs(albumId: string) {
-    console.log('album Id', albumId);
-
     const songs = await this.musicService.getSongsByAlbum(albumId);
-    console.log('songs', songs);
-
     const firstSongName = songs.length > 0 ? songs[0].name : 'Sin título';
-
     const modal = await this.modalCtrl.create({
       component: SongsModalPage,
       componentProps: {
@@ -264,7 +250,6 @@ export class HomePage implements OnInit, OnDestroy {
     });
       modal.onDidDismiss().then((result) =>{
       if (result.data) {
-        console.log('cancion recibida', result.data);
         this.song = result.data;
       }
     })
@@ -273,11 +258,8 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   async showSongsByArtist(artistId: string){
-    console.log('album Id',artistId);
     const songs = await this.musicService.getSongsByArtist(artistId);
     const artists = await this.musicService.getSongsByArtist(artistId);
-    console.log('Artists Songs', songs);
-    console.log('Artists ', artists);
 
     const modal = await this.modalCtrl.create({
       component: SongsModalPage,
@@ -288,7 +270,6 @@ export class HomePage implements OnInit, OnDestroy {
 
     modal.onDidDismiss().then((result) =>{
       if (result.data) {
-        console.log('cancion recibida', result.data);
         this.song = result.data;
       }
     })

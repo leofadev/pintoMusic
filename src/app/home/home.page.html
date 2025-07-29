@@ -85,7 +85,13 @@
       slides-per-view="2"
       space-between="16"
       autoplay="true"
-      autoplay-delay="4000">
+      autoplay-delay="4000"
+      breakpoints='{
+        "480": {"slidesPerView": 2, "spaceBetween": 16},
+        "768": {"slidesPerView": 3, "spaceBetween": 20},
+        "1024": {"slidesPerView": 4, "spaceBetween": 24},
+        "1200": {"slidesPerView": 5, "spaceBetween": 28}
+      }'>
 
       <swiper-slide *ngFor="let artist of artists" class="album-slide" (click)="showSongsByArtist(artist.id)">
         <div class="card track-card"

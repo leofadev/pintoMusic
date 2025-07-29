@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavParams, IonicModule, ModalController } from '@ionic/angular';
-import { ThemeService, Theme } from '../services/theme.service';import { StorageService } from '../services/storage.service';
+import { ThemeService, Theme } from '../services/theme.service';
+import { StorageService } from '../services/storage.service';
 import { Subscription } from 'rxjs';
 
 
@@ -15,17 +16,19 @@ import { Subscription } from 'rxjs';
 })
 export class SongsModalPage implements OnInit {
 
+  // Propiedades para almacenar los datos de canciones y artistas
   songs: any;
   artists: any;
   songName: string | null = null;
+
+  // Variables para el manejo de temas
   temaActual!: Theme;
   private themeSubscription!: Subscription;
 
   constructor(private themeService: ThemeService, private storageService: StorageService, private navParams: NavParams, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-
-    // Suscribirse a los cambios de tema
+    // Configurar la suscripción al tema actual
     this.themeSubscription = this.themeService.temaActual$.subscribe(tema => {
       this.temaActual = tema;
     });
@@ -33,33 +36,27 @@ export class SongsModalPage implements OnInit {
     // Obtener el tema actual inmediatamente (en caso de que ya esté cargado)
     this.temaActual = this.themeService.temaActual;
 
+    // Obtener los datos pasados al modal
     const receivedData = this.navParams.data;
-    console.log('Datos recibidos completos:', receivedData);
-    
     const songsData = receivedData['songs'];
 
+    // Procesar los datos de canciones según su estructura
     if (Array.isArray(songsData)) {
       // Caso 1: songs es directamente un array: { songs: [...] }
       this.songs = songsData;
       this.artists = receivedData['artist'] ?? null;
-      console.log('Caso 1 - Songs como array directo:', this.songs, this.artists);
     } else if (songsData && typeof songsData === 'object' && songsData.tracks) {
       // Caso 2: songs es un objeto con tracks y artist: { songs: { tracks: [...], artist: {...} } }
       this.songs = songsData.tracks || [];
       this.artists = songsData.artist ?? null;
-      console.log('Caso 2 - Songs como objeto con tracks:', this.songs, this.artists);
     } else {
       // Fallback - no se encontró estructura conocida
       this.songs = [];
       this.artists = null;
-      console.log('Fallback - No se encontró estructura conocida');
     }
 
-    console.log('Resultado final - Songs:', this.songs, 'Artists:', this.artists);
-
+    // Obtener el nombre de la canción si está disponible
     this.songName = receivedData['songName'] ?? null;
-    console.log('Nombre recibido de la canción:', this.songName);
-
   }
 
   ngOnDestroy() {
@@ -69,23 +66,25 @@ export class SongsModalPage implements OnInit {
     }
   }
 
-  // Método simplificado para cambiar tema
+  // Cambiar entre temas (claro/oscuro)
   async cambiarTema() {
     await this.themeService.cambiarTema();
   }
 
+  // Cerrar el modal sin seleccionar ninguna canción
   async closeModal() {
     await this.modalCtrl.dismiss();
   }
 
+  // Convertir duración de milisegundos a formato MM:SS
   formatearDuracion(ms: number): string {
     const minutos = Math.floor(ms / 60000);
     const segundos = Math.floor((ms % 60000) / 1000);
     return `${minutos}:${segundos < 10 ? '0' + segundos : segundos}`;
   }
 
+  // Seleccionar una canción y cerrar el modal retornando la canción seleccionada
   async selectSong(song: any){
-    console.log('cancion seleccionada', song);
     await this.modalCtrl.dismiss(song);
   }
 }
