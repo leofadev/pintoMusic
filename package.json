@@ -2,11 +2,12 @@
   "name": "pinto-music",
   "version": "0.0.1",
   "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "homepage": "https://leofadev.github.io/pintoMusic/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:pages": "ng build --configuration development --base-href /pintoMusic/ --deploy-url /pintoMusic/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
