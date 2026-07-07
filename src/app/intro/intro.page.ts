@@ -48,7 +48,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "SONIDO",
       backgroundImage:
-        "../../assets/images/MOOD.jpg", // Imagen de ejemplo
+        "assets/images/MOOD.jpg", // Imagen de ejemplo
     },
     {
       id: 2,
@@ -57,7 +57,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "RITMO",
       backgroundImage:
-        "../../assets/images/OCTAVO.jpg", // Imagen de ejemplo
+        "assets/images/OCTAVO.jpg", // Imagen de ejemplo
     },
     {
       id: 3,
@@ -66,7 +66,7 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#FFFFFF",
       buttonText: "MELODÍA",
       backgroundImage:
-        "../../assets/images/LIT_KILLAH.jpg", // Imagen de ejemplo
+        "assets/images/LIT_KILLAH.jpg", // Imagen de ejemplo
     },
     {
       id: 4,
@@ -75,43 +75,43 @@ export class IntroPage implements OnInit, OnDestroy, AfterViewInit {
       color: "#333333",
       buttonText: "COMENZAR",
       backgroundImage:
-        "../../assets/images/ZOMBIE.jpg", // Imagen de ejemplo
+        "assets/images/ZOMBIE.jpg", // Imagen de ejemplo
     },
   ]
 
   // Array de íconos de música para flotar
   iconMusics: IconMusic[] = [
     {
-      image: "../../assets/images/the_ama.jpg",
+      image: "assets/images/the_ama.jpg",
       text: "the_ama",
     },
     {
       image:
-        "../../assets/images/MOOD.jpg",
+        "assets/images/MOOD.jpg",
       text: "MOOD",
     },
     {
       image:
-        "../../assets/images/CAOS.jpg",
+        "assets/images/CAOS.jpg",
       text: "CAOS",
     },
     {
       image:
-        "../../assets/images/RIP_OZA.jpg",
+        "assets/images/RIP_OZA.jpg",
       text: "RIP_OZA",
     },
     {
-      image: "../../assets/images/TRAP_GOD.jpg",
+      image: "assets/images/TRAP_GOD.jpg",
       text: "TRAP_GOD",
     },
     {
       image:
-        "../../assets/images/PLAYER.jpg",
+        "assets/images/PLAYER.jpg",
       text: "PLAYER",
     },
     {
       image:
-        "../../assets/images/SAN_HALLOWEEN.jpg",
+        "assets/images/SAN_HALLOWEEN.jpg",
       text: "SAN_HALLOWEEN",
     },
   ]
